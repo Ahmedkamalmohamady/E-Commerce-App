@@ -14,6 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context)=>BlocProvider.of(context);
    HomeModel homeData=HomeModel();
    CategoryModel?categories;
+   List<Products>?products;
 void getData()
 async {
   emit(GetHomeDataLoading());
@@ -31,11 +32,11 @@ async {
 }
 void getCategories()
 async {
-  emit(GetHomeDataLoading());
+  emit(GetHomeCategoriesLoading());
   categories=await HomeServices.getCategories();
   if(categories!.status!)
   {
-    print(categories!.data!.data!.length!);
+    print(categories!.data!.data!.length);
     emit(GetHomeCategoriesSuccess(data: categories!));
   }
   else
@@ -44,5 +45,21 @@ async {
 
   }
 }
+
+  Future<void> getProductsForCategory(id)
+  async {
+    emit(GetProductsForCategoryLoading());
+    products=await HomeServices.getProductsForCategory(id);
+    if(products!=null)
+    {
+      print(products!.length);
+      emit(GetProductsForCategorySuccess(products: products!));
+    }
+    else
+    {
+      emit(GetProductsForCategoryFailed(errorMessage: 'error'));
+
+    }
+  }
 
 }

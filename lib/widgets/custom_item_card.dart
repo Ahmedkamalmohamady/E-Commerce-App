@@ -112,3 +112,14 @@ Widget customItemCard(product) => SizedBox(
         ),
       ),
 );
+
+Widget customShimmerCard() => SizedBox(
+  child:Container(
+    width: 180,
+    height: 220,
+    decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20)
+    ),
+  ),
+);

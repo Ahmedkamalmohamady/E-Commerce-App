@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
+import 'package:shop_app/screens/shimmer/home_shimmer.dart';
 
 import '../widgets/categories_list.dart';
 import '../widgets/custom_grid_view.dart';
@@ -81,9 +82,7 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return HomeShimmer();
         },
       ),
     );

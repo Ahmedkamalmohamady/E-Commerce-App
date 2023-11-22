@@ -1,4 +1,3 @@
- import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/helper/api.dart';
 import 'package:shop_app/models/category_model.dart';
@@ -25,6 +24,24 @@ async{
   );
   CategoryModel categories=  CategoryModel.fromJson(jsonData.data);
   return categories;
+}
+
+static Future<List<Products>>getProductsForCategory(int id)
+async{
+  var jsonData=await Api().get(
+    endpoint: "categories/$id",
+    token: token,
+
+  );
+
+  List<Products> products = [];
+  if (jsonData.data['data']['data'] != null) {
+
+    jsonData.data['data']['data'].forEach((v) {
+      products.add(Products.fromJson(v));
+    });
+  }
+  return products;
 }
 
 }

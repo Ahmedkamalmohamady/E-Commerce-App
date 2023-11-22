@@ -19,7 +19,7 @@ class CategoriesListView extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: HomeCubit.get(context).categories!.data!.data!.length,
           itemBuilder: (context, index) => customCategoryItem(
-              HomeCubit.get(context).categories!.data!.data![index]),
+              HomeCubit.get(context).categories!.data!.data![index],context),
         ),
       ),
     );

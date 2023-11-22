@@ -34,3 +34,20 @@ Widget customBanner(imageUrl) => SizedBox(
         ),
       ),
     );
+
+Widget customShimmerBanner() => SizedBox(
+  width: 320,
+  child: Card(
+    // color: Colors.transparent,
+    elevation: 2,
+    shadowColor: Colors.black12,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SizedBox(),
+      ),
+    ),
+  ),
+);

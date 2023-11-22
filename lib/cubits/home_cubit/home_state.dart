@@ -28,3 +28,16 @@ class GetHomeCategoriesSuccess extends HomeState {
   GetHomeCategoriesSuccess({required this.data});
 }
 
+class GetProductsForCategoryFailed extends HomeState {
+  final String errorMessage;
+
+  GetProductsForCategoryFailed({required this.errorMessage});
+}
+class GetProductsForCategoryLoading extends HomeState {
+}
+class GetProductsForCategorySuccess extends HomeState {
+  final List<Products> products;
+
+  GetProductsForCategorySuccess({required this.products});
+}
+
