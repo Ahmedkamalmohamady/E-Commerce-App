@@ -33,11 +33,13 @@ class GetProductsForCategoryFailed extends HomeState {
 
   GetProductsForCategoryFailed({required this.errorMessage});
 }
-class GetProductsForCategoryLoading extends HomeState {
-}
+class GetProductsForCategoryLoading extends HomeState {}
 class GetProductsForCategorySuccess extends HomeState {
-  final List<Products> products;
+  final List<Product> products;
 
   GetProductsForCategorySuccess({required this.products});
 }
+class GetFavouritesLoading extends HomeState {}
+class GetFavouritesSuccess extends HomeState {}
+class GetFavouritesFailed extends HomeState {}
 

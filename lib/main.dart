@@ -29,6 +29,7 @@ void main() async {
   else {
     widget = const OnBoardingScreen();
   }
+  print(token);
   runApp(ShopApp(home: widget));
 }
 
@@ -43,7 +44,7 @@ class ShopApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => NavBarCubit(),),
-        BlocProvider(create: (context) => HomeCubit()..getData(),),
+        BlocProvider(create: (context) => HomeCubit()..getData()..getFavouritesProducts(),),
 
       ],
       child: MaterialApp(

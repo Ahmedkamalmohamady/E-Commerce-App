@@ -9,7 +9,7 @@ class CustomGridView extends StatelessWidget {
     required this.products,
   });
 
-  final List<Products>? products;
+  final List<Product>? products;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CustomGridView extends StatelessWidget {
           crossAxisCount: 2,
           childAspectRatio: .65,
           mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+          crossAxisSpacing: 10,
         ),
         itemBuilder: (context, index) => customItemCard(products![index]),
         itemCount: products!.length,

@@ -21,4 +21,5 @@ const String kToken='token';
 List<Widget>kScreens=[const HomeScreen(),const FavouriteScreen(),const SettingScreen()];
 const String homeEndPoint='home';
 const String categoryEndPoint='categories';
+const String favEndPoint='favorites';
 dynamic token='';

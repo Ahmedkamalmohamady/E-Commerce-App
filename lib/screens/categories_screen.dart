@@ -25,26 +25,38 @@ final title;
            ),
            body:state is GetProductsForCategorySuccess?
              SingleChildScrollView(
-         child:CustomGridView( products:state.products)
+         child:Column(
+           children: [
+             SizedBox(height: 30,),
+             CustomGridView( products:state.products),
+           ],
+         )
        ,
        ):Shimmer.fromColors(
                baseColor: Colors.grey.shade300,
              highlightColor: Colors.grey.shade100,
-               child: GridView.count(
-                 scrollDirection: Axis.vertical,
-                 crossAxisCount: 2,
-                 shrinkWrap: true,
-                 childAspectRatio: .8,
-                 crossAxisSpacing: 20,
-                 mainAxisSpacing: 20,
-                 children: [
-                   customShimmerCard(),
-                   customShimmerCard(),
-                   customShimmerCard(),
-                   customShimmerCard(),
-                   customShimmerCard(),
-                   customShimmerCard(),
-                 ],
+               child: SingleChildScrollView(
+                 child: Column(
+                   children: [
+                     SizedBox(height: 30,),
+                     GridView.count(
+                       scrollDirection: Axis.vertical,
+                       crossAxisCount: 2,
+                       shrinkWrap: true,
+                       childAspectRatio: .8,
+                       crossAxisSpacing: 20,
+                       mainAxisSpacing: 20,
+                       children: [
+                         customShimmerCard(),
+                         customShimmerCard(),
+                         customShimmerCard(),
+                         customShimmerCard(),
+                         customShimmerCard(),
+                         customShimmerCard(),
+                       ],
+                     ),
+                   ],
+                 ),
                ),
            )
          );

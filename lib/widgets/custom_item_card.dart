@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/home_model.dart';
 
-Widget customItemCard(product) => SizedBox(
+Widget customItemCard(Product product) => SizedBox(
   child:   Card(
 
           elevation: 4,
@@ -13,10 +14,10 @@ Widget customItemCard(product) => SizedBox(
               alignment: Alignment.bottomLeft,
               children: [
                 CachedNetworkImage(
-                  width: 200,
+                  width: 210,
                   height: 180,
                   fit: BoxFit.contain,
-                  imageUrl: product.image,
+                  imageUrl: product.image!,
                   errorWidget: (context, url, error) {
                     return Column(
                       children: [
@@ -87,16 +88,17 @@ Widget customItemCard(product) => SizedBox(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('${product.price.toString()} L.E',
-                      style: customTextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: kPrimaryColor)),
-                  const SizedBox(
-                    width: 10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text('${product.price.round().toString()} L.E',
+                        style: customTextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryColor)),
                   ),
+
                   if (product.discount != 0)
-                    Text('${product.oldPrice.toString()} L.E',
+                    Text('${product.oldPrice.round().toString()} L.E',
 
                         style: customTextStyle(
                             fontSize: 14,

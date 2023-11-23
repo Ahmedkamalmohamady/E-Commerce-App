@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/services/home_services.dart';
 
@@ -14,7 +15,8 @@ class HomeCubit extends Cubit<HomeState> {
   static HomeCubit get(context)=>BlocProvider.of(context);
    HomeModel homeData=HomeModel();
    CategoryModel?categories;
-   List<Products>?products;
+   List<Product>?products;
+  FavouritesModel? favProducts;
 void getData()
 async {
   emit(GetHomeDataLoading());
@@ -43,7 +45,7 @@ async {
   {
     emit(GetHomeCategoriesFailed(data: categories!));
 
-  }
+}
 }
 
   Future<void> getProductsForCategory(id)
@@ -58,6 +60,26 @@ async {
     else
     {
       emit(GetProductsForCategoryFailed(errorMessage: 'error'));
+
+    }
+  }
+
+
+  Future<void> getFavouritesProducts()
+  async {
+    emit(GetFavouritesLoading());
+
+    favProducts=await HomeServices.getFavProducts();
+    if(FavProductData!=null)
+    {
+      print(favProducts!.status);
+      print(favProducts!.status);
+
+      emit(GetFavouritesSuccess());
+    }
+    else
+    {
+      emit(GetFavouritesFailed());
 
     }
   }

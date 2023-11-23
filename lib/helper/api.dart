@@ -9,14 +9,14 @@ class Api {
   ///getMethod
   Future<Response> get(
       {token,
-      @required queryParameters,
+       queryParameters,
       required String endpoint}) async {
     Map<String, String> headers = {
       'Content-Type':'application/json',
       'lang':'en',
     };
     if (token != null) {
-      headers.addAll({'Authorization': 'Bearer $token'});
+      headers.addAll({'Authorization': '$token'});
     }
     var dio = Dio();
     var response = await dio.get(baseUrl+endpoint,
