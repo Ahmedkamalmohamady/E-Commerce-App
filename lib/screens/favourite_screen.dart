@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/models/home_model.dart';
 
 import '../constants.dart';
+import '../models/favourites_model.dart';
+import '../services/favourites_services.dart';
 import '../widgets/custom_grid_view.dart';
+import '../widgets/custom_widgets.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -25,7 +29,8 @@ class FavouriteScreen extends StatelessWidget {
       builder: (context, state) {
         var products =
         HomeCubit.get(context).favProducts!.data!.FavProducts!;
-        return Column(
+        return  HomeCubit.get(context).favProducts!.data!.FavProducts!.isNotEmpty?
+          Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
@@ -36,7 +41,7 @@ class FavouriteScreen extends StatelessWidget {
               child: ListView.separated(
                   itemBuilder: (context, index) {
                     var product=products[index].product;
-                    return customFavCard(product);
+                    return customFavCard(product,context);
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(
@@ -53,14 +58,15 @@ class FavouriteScreen extends StatelessWidget {
               ),
             ),
           ],
-        );
+        )
+        :Center(child: Text('No Favourites Found ',style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold),));
       },
     ),
     );
   }
 }
 
-Widget customFavCard(product) => Row(
+Widget customFavCard(product,context) => Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Stack(
@@ -140,10 +146,14 @@ Widget customFavCard(product) => Row(
           ),
         ),
         InkWell(
-            onTap: () {},
-            splashColor: Colors.red,
+            onTap: () async{
+              HomeCubit.get(context).changeFavourite(product.id);
+            },
+
             splashFactory: InkSparkle.splashFactory,
-            child: const Icon(Icons.favorite_border,
-                color: Colors.black45, size: 30)),
+            child: HomeCubit.get(context).favourites[product.id]!?CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
+              backgroundColor: Colors.black12,child: const Icon(Icons.favorite_border,
+                color: Colors.black45, size: 30),
+            )),
       ],
     );

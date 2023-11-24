@@ -41,8 +41,9 @@ class Api {
         required String endpoint,
         required Map<String,String>body
       }) async {
+
     if (token != null) {
-      headers?.addAll({'Authorization': 'Bearer $token',});
+      headers!.addAll({'Authorization': token,});
     }
     var dio = Dio();
     Response response = await dio.post(baseUrl+endpoint,
@@ -53,6 +54,7 @@ class Api {
         queryParameters: queryParameters,
     );
     if (response.statusCode == 200) {
+      print(headers);
       return response;
     } else {
       throw Exception(

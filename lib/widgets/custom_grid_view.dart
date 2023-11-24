@@ -24,7 +24,7 @@ class CustomGridView extends StatelessWidget {
           mainAxisSpacing: 20,
           crossAxisSpacing: 10,
         ),
-        itemBuilder: (context, index) => customItemCard(products![index]),
+        itemBuilder: (context, index) => customItemCard(products![index],context),
         itemCount: products!.length,
       ),
     );

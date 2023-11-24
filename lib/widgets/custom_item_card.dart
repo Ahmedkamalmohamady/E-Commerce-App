@@ -1,9 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
+import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/services/favourites_services.dart';
+import 'package:shop_app/widgets/custom_widgets.dart';
 
-Widget customItemCard(Product product) => SizedBox(
+Widget customItemCard(Product product,context) => SizedBox(
   child:   Card(
 
           elevation: 4,
@@ -53,11 +58,15 @@ Widget customItemCard(Product product) => SizedBox(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                        onTap: () {},
-                        splashColor: Colors.red,
+                        onTap: () async{
+                          HomeCubit.get(context).changeFavourite(product.id);
+                          },
+
                         splashFactory: InkSparkle.splashFactory,
-                        child: const Icon(Icons.favorite_border,
-                            color: Colors.black45, size: 30)),
+                        child: HomeCubit.get(context).favourites[product.id]!?CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
+                          backgroundColor: Colors.black12,child: const Icon(Icons.favorite_border,
+                              color: Colors.black45, size: 30),
+                        )),
                   ),
                 )
               ],

@@ -42,4 +42,16 @@ class GetProductsForCategorySuccess extends HomeState {
 class GetFavouritesLoading extends HomeState {}
 class GetFavouritesSuccess extends HomeState {}
 class GetFavouritesFailed extends HomeState {}
+class ChangeFavouriteItemSuccess extends HomeState
+{
+  final String msg;
 
+  ChangeFavouriteItemSuccess({required this.msg});
+}
+class ChangeFavouriteItemFailed extends HomeState
+{
+  final String msg;
+
+  ChangeFavouriteItemFailed({required this.msg});
+}
+class ChangeFavouriteItem extends HomeState {}

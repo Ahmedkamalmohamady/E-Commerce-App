@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/screens/shimmer/home_shimmer.dart';
+import 'package:shop_app/widgets/custom_widgets.dart';
 
 import '../widgets/categories_list.dart';
 import '../widgets/custom_grid_view.dart';
@@ -47,9 +48,11 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: BlocConsumer<HomeCubit, HomeState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+
+        },
         builder: (context, state) {
-          if (state is GetHomeDataSuccess) {
+          if (HomeCubit.get(context).homeData.data!=null) {
             var products = HomeCubit.get(context).homeData.data!.products;
             return SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
