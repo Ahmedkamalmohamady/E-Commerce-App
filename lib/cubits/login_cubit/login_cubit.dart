@@ -1,6 +1,8 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shop_app/cache_helper/shared_preferences.dart';
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/models/user_model.dart';
 import 'package:shop_app/services/user_services.dart';
@@ -18,6 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
      isLoading =true ;
       var data =await UserServices().login(email: email, password: password);
      loginModel=LoginModel.fromJson(data.data);
+
       isLoading=false;
       if(loginModel.status ==false)
       {
@@ -25,6 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
       }
       else{
         emit(LoginSuccess(loginModel: loginModel));
+
       }
 
 

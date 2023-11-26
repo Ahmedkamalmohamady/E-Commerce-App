@@ -9,7 +9,7 @@ class HomeServices
 {
 static Future<HomeModel>getHomeData()
 async{
- var jsonData=await Api().get(
+ var jsonData=await Api.get(
      endpoint: homeEndPoint,
    token: token,
 
@@ -19,7 +19,7 @@ async{
 }
 static Future<CategoryModel>getCategories()
 async{
-  var jsonData=await Api().get(
+  var jsonData=await Api.get(
     endpoint: categoryEndPoint,
 
   );
@@ -29,7 +29,7 @@ async{
 
 static Future<List<Product>>getProductsForCategory(int id)
 async{
-  var jsonData=await Api().get(
+  var jsonData=await Api.get(
     endpoint: "categories/$id",
     token: token,
 
@@ -47,7 +47,7 @@ async{
 ///
 static Future<FavouritesModel>getFavProducts()
 async{
-  var jsonData=await Api().get(
+  var jsonData=await Api.get(
     endpoint: favEndPoint,
     token: token,
 

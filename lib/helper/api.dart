@@ -7,7 +7,7 @@ class Api {
  static String baseUrl = 'https://student.valuxapps.com/api/';
 
   ///getMethod
-  Future<Response> get(
+  static Future<Response> get(
       {token,
        queryParameters,
       required String endpoint}) async {

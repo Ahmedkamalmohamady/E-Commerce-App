@@ -51,7 +51,7 @@ class ShopAppScreen extends StatelessWidget {
                   BottomNavigationBarItem(
                       icon: Icon(Icons.favorite), label: "Favourite"),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.settings), label: "Settings"),
+                      icon: Icon(Icons.person), label: "Profile"),
                 ],
 
               ),
@@ -61,12 +61,15 @@ class ShopAppScreen extends StatelessWidget {
         );
       },
     );
-  }
+}
 
-  void signOut(BuildContext context) {
-    CacheHelper.remove(key: kToken).then((value) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen(),));
-    });
-  }
+
+}
+void signOut(BuildContext context) {
+
+  CacheHelper.remove(key: kToken).then((value) {
+    NavBarCubit.get(context).currentIndex=0;
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const LoginScreen(),));
+  });
 }

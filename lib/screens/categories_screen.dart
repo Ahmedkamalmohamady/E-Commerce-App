@@ -5,6 +5,7 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/widgets/custom_grid_view.dart';
 
+import '../widgets/custom_category_item.dart';
 import '../widgets/custom_item_card.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -14,57 +15,28 @@ final title;
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<HomeCubit,HomeState>(
-      bloc: HomeCubit()..getProductsForCategory(id),
-     builder: (context, state)
-     {
-
-         return Scaffold(
-           appBar: AppBar(
-             title: Text(title,style: customTextStyle(fontWeight: FontWeight.w600)),
-           ),
-           body:state is GetProductsForCategorySuccess?
-             SingleChildScrollView(
-         child:Column(
-           children: [
-             SizedBox(height: 30,),
-             CustomGridView( products:state.products),
-           ],
-         )
-       ,
-       ):Shimmer.fromColors(
-               baseColor: Colors.grey.shade300,
-             highlightColor: Colors.grey.shade100,
-               child: SingleChildScrollView(
-                 child: Column(
-                   children: [
-                     SizedBox(height: 30,),
-                     GridView.count(
-                       scrollDirection: Axis.vertical,
-                       crossAxisCount: 2,
-                       shrinkWrap: true,
-                       childAspectRatio: .8,
-                       crossAxisSpacing: 20,
-                       mainAxisSpacing: 20,
-                       children: [
-                         customShimmerCard(),
-                         customShimmerCard(),
-                         customShimmerCard(),
-                         customShimmerCard(),
-                         customShimmerCard(),
-                         customShimmerCard(),
-                       ],
-                     ),
-                   ],
-                 ),
-               ),
-           )
-         );
-
-
-
-
-     },
+    return BlocBuilder<HomeCubit, HomeState>(
+      bloc: HomeCubit.get(context)..getProductsForCategory(id),
+      builder: (context, state) {
+        return Scaffold(
+            appBar: AppBar(
+              title: Text(title,style: customTextStyle(fontWeight: FontWeight.w600)),
+            ),
+            body:state is GetProductsForCategoryLoading ?const CustomShimmerCategoryProduct():HomeCubit.get(context).products!=null
+                ?SingleChildScrollView(
+              child:Column(
+                children: [
+                  const SizedBox(height: 30,),
+                  CustomGridView( products:HomeCubit.get(context).products),
+                ],
+              )
+              ,
+            ):
+            const CustomShimmerCategoryProduct()
+        );
+      },
     );
   }
 }
+
+

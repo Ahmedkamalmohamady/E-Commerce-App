@@ -19,17 +19,17 @@ class FavouriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+
         title: Text('Favourite Products',
             style: customTextStyle(
                 fontWeight: FontWeight.bold, fontSize: 22,color: kPrimaryColor)),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
       ),
       body: BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var products =
-        HomeCubit.get(context).favProducts!.data!.FavProducts!;
-        return  HomeCubit.get(context).favProducts!.data!.FavProducts!.isNotEmpty?
+
+        return HomeCubit.get(context).favouritesIsReady==null?LinearProgressIndicator(color: kPrimaryColor,):HomeCubit.get(context).favProducts!.data?.FavProducts!= null?
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,6 +40,8 @@ class FavouriteScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                   itemBuilder: (context, index) {
+                    var products =
+                    HomeCubit.get(context).favProducts!.data!.FavProducts!;
                     var product=products[index].product;
                     return customFavCard(product,context);
                   },
@@ -54,7 +56,7 @@ class FavouriteScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  itemCount:products.length
+                  itemCount: HomeCubit.get(context).favProducts!.data!.FavProducts!.length
               ),
             ),
           ],

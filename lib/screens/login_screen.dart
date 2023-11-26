@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         );
       },
-      listener: (context, state) {
+      listener: (context, state) async{
         if (state is LoginSuccess)
         {
         ShowToastMessage(
@@ -134,10 +134,11 @@ class _LoginScreenState extends State<LoginScreen> {
           color: Colors.green,
         );
 
-        CacheHelper.saveData(key: kToken,value:state.loginModel.data!.token).then((value){
+       await CacheHelper.saveData(key: kToken,value:state.loginModel.data!.token).then((value)async{
           if(value)
           {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopAppScreen(),));
+            token= await CacheHelper.getData(key: kToken);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShopAppScreen(),));
 
           }
         });

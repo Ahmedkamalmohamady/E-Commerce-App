@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/helper/api.dart';
 
 class UserServices
@@ -26,6 +27,17 @@ return data;
   }
 
 
+  Future<Response>getUserProfile({required token})
+  async{
+    Response  data =await Api.get(
+
+      token: token,
+      endpoint:'profile',
+    );
+
+    return data;
+
+  }
 
 
 

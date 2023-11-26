@@ -6,6 +6,7 @@ import 'package:shop_app/screens/home_screen.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
 import 'package:shop_app/screens/settings_screen.dart';
 
+import 'cache_helper/shared_preferences.dart';
 import 'models/onboarding_model.dart';
 
 const  kPrimaryColor=Color(0xff6C63FD);
@@ -18,8 +19,8 @@ var customTextStyle=GoogleFonts.openSans;
 const String kOnBoarding='onBoarding';
 const String kDarkMode='darkMode';
 const String kToken='token';
-List<Widget>kScreens=[const HomeScreen(),const FavouriteScreen(),const SettingScreen()];
+List<Widget>kScreens=[const HomeScreen(),const FavouriteScreen(),const ProfileScreen()];
 const String homeEndPoint='home';
 const String categoryEndPoint='categories';
 const String favEndPoint='favorites';
-dynamic token='';
+String? token;

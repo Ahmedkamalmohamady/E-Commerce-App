@@ -13,7 +13,7 @@ class FavouritesServices
         body: {
           'product_id':id.toString()
         },
-      headers: {'Authorization': token},
+      headers: {'Authorization': token!},
     );
     print(token);
     FavouritesModel favRsponse=FavouritesModel.fromJson(response.data);

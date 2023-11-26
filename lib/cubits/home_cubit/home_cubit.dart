@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/services/home_services.dart';
@@ -20,7 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
   CategoryModel?categories;
   List<Product>?products;
   FavouritesModel? favProducts;
-  Map<int, bool>favourites = {};
+  Map<int, bool>favourites = {94:true};
+  bool? favouritesIsReady;
 
   void getData() async {
     emit(GetHomeDataLoading());
@@ -34,6 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
       print(homeData.data!.products!.length);
       print(favourites);
+      favouritesIsReady =true;
       emit(GetHomeDataSuccess(data: homeData));
     }
     else {

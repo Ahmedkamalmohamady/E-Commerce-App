@@ -5,6 +5,7 @@ import 'package:shop_app/bloc_observer/Bloc_observer.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
+import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
 import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
 import 'package:shop_app/screens/login_screen.dart';
@@ -16,7 +17,7 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   dynamic onBoarding = await CacheHelper.getData(key: kOnBoarding);
-  token = await CacheHelper.getData(key: kToken);
+  token =await CacheHelper.getData(key: kToken);
   Widget widget;
   if (onBoarding == false) {
     if (token != null) {
@@ -43,13 +44,14 @@ class ShopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => LoginCubit()..loginUser(email: 'ahmed12345@gmail.com', password: '123456'),),
         BlocProvider(create: (context) => NavBarCubit(),),
         BlocProvider(create: (context) => HomeCubit()..getData()..getFavouritesProducts(),),
 
       ],
       child: MaterialApp(
         theme: ThemeData(
-            brightness: Brightness.light,
+            brightness: Brightness.dark,
             primarySwatch: Colors.indigo,
             fontFamily: GoogleFonts
                 .openSans()

@@ -11,6 +11,8 @@ class HomeShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -67,8 +69,6 @@ class HomeShimmer extends StatelessWidget {
             ],
           ),
         ),
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
 
     );
   }

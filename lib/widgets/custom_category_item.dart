@@ -1,14 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/category_model.dart';
 import 'package:shop_app/screens/categories_screen.dart';
+
+import '../cubits/home_cubit/home_cubit.dart';
+import 'custom_item_card.dart';
 
 Widget customCategoryItem(CategoryData category,context) => SizedBox(
 
   child: InkWell(
     onTap: () {
+
       Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriesScreen(id:category.id,title:category.name),));
     },
     child: Card(
@@ -94,3 +99,39 @@ Widget customShimmerCategoryItem() => SizedBox(
     ),
   ),
 );
+class CustomShimmerCategoryProduct extends StatelessWidget {
+  const CustomShimmerCategoryProduct({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 30,),
+            GridView.count(
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              childAspectRatio: .8,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              children: [
+                customShimmerCard(),
+                customShimmerCard(),
+                customShimmerCard(),
+                customShimmerCard(),
+                customShimmerCard(),
+                customShimmerCard(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
