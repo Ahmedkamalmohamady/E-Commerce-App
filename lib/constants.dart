@@ -4,7 +4,7 @@ import 'package:shop_app/screens/categories_screen.dart';
 import 'package:shop_app/screens/favourite_screen.dart';
 import 'package:shop_app/screens/home_screen.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
-import 'package:shop_app/screens/settings_screen.dart';
+import 'package:shop_app/screens/profile_screen.dart';
 
 import 'cache_helper/shared_preferences.dart';
 import 'models/onboarding_model.dart';

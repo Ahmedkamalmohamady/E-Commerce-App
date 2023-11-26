@@ -7,7 +7,7 @@ import 'package:shop_app/screens/home_screen.dart';
 import '../../screens/categories_screen.dart';
 import '../../screens/favourite_screen.dart';
 import '../../screens/shop_app_screen.dart';
-import '../../screens/settings_screen.dart';
+import '../../screens/profile_screen.dart';
 
 part 'nav_bar_state.dart';
 

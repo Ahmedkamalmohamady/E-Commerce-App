@@ -12,8 +12,9 @@ class ProfileMenuWidget extends StatelessWidget {
     required this.onPress,
     this.endIcon = true,
     this.textColor,
+    this.trailing
   }) : super(key: key);
-
+  final Widget?trailing;
   final String title;
   final IconData icon;
   final VoidCallback onPress;
@@ -35,10 +36,10 @@ class ProfileMenuWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
           color: iconColor.withOpacity(0.1),
         ),
-        child: Icon(icon, color: iconColor),
+        child: Icon(icon, color: textColor??iconColor),
       ),
       title: Text(title, style: Theme.of(context).textTheme.bodyText1?.apply(color: textColor)),
-      trailing: endIcon? Container(
+      trailing: endIcon? trailing??Container(
           width: 30,
           height: 30,
           decoration: BoxDecoration(
