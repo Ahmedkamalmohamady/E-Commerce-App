@@ -35,7 +35,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     var pageController = PageController();
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.transparent,
+
             actions: [
               TextButton(
                   onPressed: () {

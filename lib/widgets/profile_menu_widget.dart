@@ -9,7 +9,7 @@ class ProfileMenuWidget extends StatelessWidget {
     Key? key,
     required this.title,
     required this.icon,
-    required this.onPress,
+    // required this.onPress,
     this.endIcon = true,
     this.textColor,
     this.trailing
@@ -17,7 +17,7 @@ class ProfileMenuWidget extends StatelessWidget {
   final Widget?trailing;
   final String title;
   final IconData icon;
-  final VoidCallback onPress;
+  // final VoidCallback onPress;
   final bool endIcon;
   final Color? textColor;
 
@@ -28,7 +28,7 @@ class ProfileMenuWidget extends StatelessWidget {
     var iconColor = kPrimaryColor;
 
     return ListTile(
-      onTap: onPress,
+      // onTap: onPress,
       leading: Container(
         width: 40,
         height: 40,

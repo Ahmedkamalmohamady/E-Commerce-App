@@ -66,14 +66,14 @@ class Api {
 
  ///putMethod
  static Future<Response> put(
-     {token,
+     {required token,
        queryParameters,
        Map<String,String>? headers,
        required String endpoint,
        required Map<String,String>body
      }) async {
    if (token != null) {
-     headers?.addAll({'Authorization': 'Bearer $token',});
+     headers?.addAll({'Authorization': '$token',});
    }
    var dio = Dio();
    Response response = await dio.put(baseUrl+endpoint,

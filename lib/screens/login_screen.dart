@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
+import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
 import 'package:shop_app/screens/onboarding_screen.dart';
 import 'package:shop_app/screens/register_screen.dart';
@@ -12,27 +13,21 @@ import 'package:shop_app/screens/register_screen.dart';
 import '../constants.dart';
 import '../widgets/custom_widgets.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  double height =const MediaQueryData().size.height;
-
-  double width =const MediaQueryData().size.width;
-
-  GlobalKey<FormState> formKey=GlobalKey();
-
-  String? email;
-
-  String? password;
 
 
   @override
   Widget build(BuildContext context) {
+    double height =const MediaQueryData().size.height;
+
+    double width =const MediaQueryData().size.width;
+
+    GlobalKey<FormState> formKey=GlobalKey();
+
+    String? email;
+
+    String? password;
 
     return  BlocProvider(
   create: (context) => LoginCubit(),
@@ -138,6 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if(value)
           {
             token= await CacheHelper.getData(key: kToken);
+            UserCubit.get(context).getUserProfile();
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShopAppScreen(),));
 
           }
@@ -176,6 +172,4 @@ class _LoginScreenState extends State<LoginScreen> {
 
         });
   }
-
-
 }

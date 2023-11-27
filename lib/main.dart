@@ -7,6 +7,7 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
 import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
+import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
 import 'package:shop_app/screens/login_screen.dart';
 import 'package:shop_app/screens/onboarding_screen.dart';
@@ -44,10 +45,10 @@ class ShopApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginCubit()..loginUser(email: 'ahmed12345@gmail.com', password: '123456'),),
+        BlocProvider(create: (context) => LoginCubit(),),
         BlocProvider(create: (context) => NavBarCubit(),),
         BlocProvider(create: (context) => HomeCubit()..getData()..getFavouritesProducts(),),
-
+        BlocProvider(create: (context) => UserCubit()..getUserProfile(),),
       ],
       child: MaterialApp(
         theme: ThemeData(

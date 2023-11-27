@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/screens/login_screen.dart';
 import 'package:shop_app/widgets/custom_text_form_field.dart';
 
@@ -9,23 +11,37 @@ import '../constants.dart';
 
 import '../widgets/custom_widgets.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  var isLoading= false;
-  GlobalKey<FormState> formKey =GlobalKey();
+
+
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey =GlobalKey();
     double height =const MediaQueryData().size.height;
-
     double width =const MediaQueryData().size.width;
-    String email='';
-    String password='';
+    final TextEditingController nameController=TextEditingController();
+    final TextEditingController emailController=TextEditingController();
+    final TextEditingController phoneController=TextEditingController();
+    final TextEditingController passwordController=TextEditingController();
+    return BlocConsumer<UserCubit, UserState>(
+  listener: (context, state) {
+    if(state is RegisterUserSuccess)
+    {
+      ShowToastMessage(msg: state.message);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen(),));
+
+
+    }
+    if(state is RegisterUserFailed)
+    {
+      ShowToastMessage(msg: state.errorMessage);
+    }
+
+  },
+  builder: (context, state) {
     return Scaffold(
       body:
       SingleChildScrollView(
@@ -54,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomTextForm(
                     onChanged: (value) {
-                      email =value;
+                      nameController.text =value;
                     }
                     ,isPassword: false,hintText: 'Enter your user name',labelText: 'UserName',prefixIcon: Icons.person),
                 const SizedBox(
@@ -63,14 +79,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomTextForm(
                   type: TextInputType.phone,
                     onChanged: (value) {
-                      email =value;
+                    phoneController.text=value;
                     }
                     ,isPassword: false,hintText: 'Enter your phone number',labelText: 'Phone',prefixIcon: Icons.phone),  const SizedBox(
                   height: 10,
                 ),
                 CustomTextForm(
                     onChanged: (value) {
-                      email =value;
+                      emailController.text =value;
                     }
                     ,isPassword: false,hintText: 'Enter your email',labelText: 'Email',prefixIcon: Icons.email_outlined),
                 const SizedBox(
@@ -78,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomTextForm(
                     onChanged: (value) {
-                      password =value;
+                      passwordController.text =value;
                     },
                     isPassword: true,hintText: 'Enter your password',labelText: 'Password',prefixIcon: Icons.lock),
 
@@ -87,44 +103,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 CustomButton(
 
-                  text: isLoading ? null : 'Register',
-                  onPressed: isLoading ? null : () async {
-                    //   if (formKey.currentState!.validate()){
-                    //   // {
-                    //   //   setState(() {
-                    //   //     isLoading = true; // Show loading state
-                    //   //   });
-                    //   //   try {
-                    //   //     await registerAccount(email, password);
-                    //   //
-                    //   //     // Registration successful, show toast or snackbar
-                    //   //     ShowToastMessage("Registration successful",Colors.green);
-                    //   //     Navigator.pushNamed(context, 'loginScreen');
-                    //   //
-                    //   //
-                    //   //     setState(() {
-                    //   //       isLoading = false; // Disable loading state
-                    //   //     });
-                    //   //   }on FirebaseAuthException catch (e) {
-                    //   //     if(e.code=='weak-password')
-                    //   //     {
-                    //   //       ShowToastMessage('weak password',Colors.red);
-                    //   //     }
-                    //   //     else if (e.code=='email-already-in-use')
-                    //   //     {
-                    //   //       ShowToastMessage('email already exist',Colors.red);
-                    //   //
-                    //   //     }
-                    //   //     else{
-                    //   //       ShowToastMessage(e.code.toString(),Colors.black);
-                    //   //     }
-                    //   //     setState(() {
-                    //   //       isLoading = false; // Disable loading state
-                    //   //     });
-                    //   //   }
-                    //   // }
-                    //
-                    // },
+                  text: UserCubit.get(context).isLoading ? null : 'Register',
+                  onPressed: UserCubit.get(context).isLoading ? null : () async {
+                  if(formKey.currentState!.validate())
+                  {
+                    UserCubit.get(context).registerUser(
+                      name: nameController.text,
+                      password: passwordController.text,
+                      email: emailController.text,
+                      phone: phoneController.text,
+                    );
+
+                  }
                   }
                   ),
                 Row(
@@ -148,9 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  },
+);
   }
-
-
-
-
 }

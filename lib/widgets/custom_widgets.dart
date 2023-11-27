@@ -6,14 +6,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../constants.dart';
 
 class CustomTextForm extends StatefulWidget {
-  CustomTextForm({super.key,required this.isPassword ,this.onChanged, this.hintText,this.labelText,this.prefixIcon,this.radius=3,this.type=TextInputType.text});
+  CustomTextForm({super.key,required this.isPassword ,this.controller,this.onChanged, this.hintText,this.labelText,this.prefixIcon,this.radius=3,this.type=TextInputType.text});
   String? hintText;
   String? labelText;
   IconData? prefixIcon;
   bool isPassword;
   double radius;
   TextInputType type=TextInputType.none;
-
+  TextEditingController? controller;
   Function (String)? onChanged;
 
   @override
@@ -25,6 +25,7 @@ class _CustomTextFormState extends State<CustomTextForm> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
       keyboardType: widget.type,
       validator: (value) {
         if (value!.isEmpty)
@@ -108,10 +109,10 @@ class _CustomButtonState extends State<CustomButton> {
           ? Text(
         widget.text!,
         style: TextStyle(
-          color: Theme.of(context).brightness == Brightness.dark
+          color: Theme.of(context).brightness == Brightness.light
               ? Colors.black54
               : Colors.white,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
           height: 0,
           letterSpacing: -0.32,
           fontSize: 16,
