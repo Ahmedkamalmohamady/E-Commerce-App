@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
@@ -16,9 +18,11 @@ Widget customItemCard(Product product,context) => SizedBox(
       print(HomeCubit.get(context).favourites[product.id]);
       Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetails(product: product),));
     },
-    child: Card(
+    child: Stack(
+      children: [
+        Card(
 
-            elevation: 4,
+          elevation: 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,7 +46,7 @@ Widget customItemCard(Product product,context) => SizedBox(
                       );
                     },
                     placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
+                    const Center(child: CircularProgressIndicator()),
                   ),
                   if (product.discount != 0)
                     Padding(
@@ -53,10 +57,10 @@ Widget customItemCard(Product product,context) => SizedBox(
                         color: Colors.redAccent,
                         child: const Center(
                             child: Text(
-                          'DISCOUNT',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        )),
+                              'DISCOUNT',
+                              style: TextStyle(
+                                  color: Colors.white, fontWeight: FontWeight.bold),
+                            )),
                       ),
                     ),
                   Positioned(
@@ -67,12 +71,12 @@ Widget customItemCard(Product product,context) => SizedBox(
                       child: InkWell(
                           onTap: () async{
                             HomeCubit.get(context).changeFavourite(product.id);
-                            },
+                          },
 
                           splashFactory: InkSparkle.splashFactory,
                           child: HomeCubit.get(context).favourites[product.id]!?CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
                             backgroundColor: Colors.black12,child: const Icon(Icons.favorite_border,
-                                color: Colors.black45, size: 30),
+                              color: Colors.black45, size: 30),
                           )),
                     ),
                   )
@@ -129,6 +133,15 @@ Widget customItemCard(Product product,context) => SizedBox(
             ],
           ),
         ),
+        InkWell(
+            onTap: () async{
+              CartCubit.get(context).AddOrRemoveProductToCart(product.id);
+            },
+
+            splashFactory: InkSparkle.splashFactory,
+            child: CircleAvatar(backgroundColor: Colors.black12,child: Icon(LineAwesomeIcons.add_to_shopping_cart,size: 30,color: kPrimaryColor,))),
+      ],
+    ),
   ),
 );
 

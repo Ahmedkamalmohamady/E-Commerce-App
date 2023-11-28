@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
-import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
-import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
 import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
 import 'package:shop_app/screens/login_screen.dart';
-
 import '../widgets/custom_widgets.dart';
 
 class ShopAppScreen extends StatelessWidget {
@@ -26,12 +25,22 @@ class ShopAppScreen extends StatelessWidget {
         {
           ShowToastMessage(msg: state.msg,color: Colors.red);
         }
+
       },
       builder: (context, state) {
         return BlocBuilder<NavBarCubit, NavBarState>(
 
           builder: (context, state) {
             return Scaffold(
+              floatingActionButton: Stack(
+                alignment: Alignment.center,
+                children: [
+                  CircleAvatar(radius: 35,backgroundColor: Colors.transparent),
+                  CircleAvatar(radius: 30,child: Icon(LineAwesomeIcons.shopping_cart)),
+                  Positioned(top: 0,right: 8,child: CircleAvatar(backgroundColor: Colors.white,radius: 12,child: Text('13',style: TextStyle(color: kPrimaryColor,fontSize: 12,fontWeight: FontWeight.bold)),))
+
+                ],
+              ),
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 currentIndex: NavBarCubit

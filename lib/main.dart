@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/bloc_observer/Bloc_observer.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
 import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
@@ -49,6 +50,8 @@ class ShopApp extends StatelessWidget {
         BlocProvider(create: (context) => NavBarCubit(),),
         BlocProvider(create: (context) => HomeCubit()..getData()..getFavouritesProducts(),),
         BlocProvider(create: (context) => UserCubit()..getUserProfile(),),
+        BlocProvider(create: (context) => CartCubit(),),
+
       ],
       child: MaterialApp(
         theme: ThemeData(
