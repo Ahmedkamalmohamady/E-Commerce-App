@@ -5,6 +5,7 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/screens/product_details.dart';
 import 'package:shop_app/services/favourites_services.dart';
 import 'package:shop_app/widgets/custom_widgets.dart';
 
@@ -13,6 +14,7 @@ Widget customItemCard(Product product,context) => SizedBox(
     onTap: (){
       print(product.id);
       print(HomeCubit.get(context).favourites[product.id]);
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductDetails(product: product),));
     },
     child: Card(
 

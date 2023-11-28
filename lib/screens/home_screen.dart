@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/screens/shimmer/home_shimmer.dart';
@@ -38,10 +39,13 @@ class HomeScreen extends StatelessWidget {
               style: customTextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 22),
+                  fontSize: 22,
+                letterSpacing: -1.20
+              ),
             ),
             const Icon(
-              CupertinoIcons.cart,
+              size: 30,
+              LineAwesomeIcons.shopping_cart,
               color: kPrimaryColor,
             )
           ],

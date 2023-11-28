@@ -52,7 +52,7 @@ class ShopApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            brightness: Brightness.dark,
+            brightness: Brightness.light,
             primarySwatch: Colors.indigo,
             fontFamily: GoogleFonts
                 .openSans()

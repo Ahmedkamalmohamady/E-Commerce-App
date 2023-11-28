@@ -78,10 +78,10 @@ class CustomButton extends StatefulWidget {
   const CustomButton({
     this.text,
     this.onPressed,
-    this.radius=3.0,
+    this.radius=10.0,
     this.width=double.maxFinite,
     this.height=50,
-    Key? key,
+    Key? key, this.textStyle,
   }) : super(key: key);
 
   final String? text;
@@ -89,6 +89,7 @@ class CustomButton extends StatefulWidget {
   final  double radius;
   final double width;
   final double height;
+  final TextStyle? textStyle;
   @override
   _CustomButtonState createState() => _CustomButtonState();
 }
@@ -108,7 +109,7 @@ class _CustomButtonState extends State<CustomButton> {
       child: widget.text != null
           ? Text(
         widget.text!,
-        style: TextStyle(
+        style: widget.textStyle??TextStyle(
           color: Theme.of(context).brightness == Brightness.light
               ? Colors.black54
               : Colors.white,
