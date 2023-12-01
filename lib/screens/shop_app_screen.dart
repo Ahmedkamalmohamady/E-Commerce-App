@@ -52,14 +52,14 @@ class ShopAppScreen extends StatelessWidget {
                   return Stack(
                   alignment: Alignment.center,
                   children: [
-                    const CircleAvatar(radius: 35,backgroundColor: Colors.transparent),
-                     CircleAvatar(radius: 30,child:(state is GetCartLoading ||state is AddingToCartLoading)?CircularProgressIndicator(): Icon(LineAwesomeIcons.shopping_cart)),
+                    const CircleAvatar(radius: 35,backgroundColor: kPrimaryColor),
+                     CircleAvatar(backgroundColor: kPrimaryColor,radius: 30,child:(state is GetCartLoading ||state is AddingToCartLoading)?CircularProgressIndicator(color: Colors.white,): Icon(LineAwesomeIcons.shopping_cart,size: 30,)),
                     if(CartCubit.get(context).cartItems!=null&&CartCubit.get(context).myCart!.data.cartItems.length!=0)Positioned(top: 0,right: 8,child: CircleAvatar(backgroundColor: Colors.white,radius: 12,child: Text(CartCubit.get(context).myCart!.data.cartItems.length.toString(),style: TextStyle(color: kPrimaryColor,fontSize: 14,fontWeight: FontWeight.bold)),))
 
                   ],
                 );
-  },
-),
+             },
+           ),
               ),
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,

@@ -23,6 +23,7 @@ class ProductDetails extends StatelessWidget {
     return BlocBuilder<CartCubit,CartState>(
   builder: (context, state) {
     var isLoading=CartCubit.get(context).isLoading;
+    var inCart=CartCubit.get(context).cartProducts;
     return Scaffold(
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -81,8 +82,9 @@ class ProductDetails extends StatelessWidget {
             ),
             CustomButton(onPressed: (){
               CartCubit.get(context).AddOrRemoveProductToCart(product.id);
+              print(inCart[product.id]);
             },
-              text: isLoading? null:'Add to Cart',
+              text: isLoading? null:inCart[product.id]!=null&&inCart[product.id]==false?'Remove from Cart':'Add to Cart',
               width: 200,textStyle:const TextStyle(
               color: Colors.white,
               fontSize: 16,

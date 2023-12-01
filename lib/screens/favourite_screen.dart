@@ -32,7 +32,7 @@ class FavouriteScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
 
-        return HomeCubit.get(context).favouritesIsReady==null?LinearProgressIndicator(color: kPrimaryColor,):HomeCubit.get(context).favProducts!.data?.FavProducts!= null?
+        return HomeCubit.get(context).favouritesIsReady==null?LinearProgressIndicator(color: kPrimaryColor,):HomeCubit.get(context).favProducts!.data!.FavProducts!.isNotEmpty?
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,7 +64,7 @@ class FavouriteScreen extends StatelessWidget {
             ),
           ],
         )
-        :Center(child: Text('No Favourites Found ',style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold),));
+        :Center(child: Text('No favourites yet ',style: TextStyle(color: kPrimaryColor,fontSize: 20),));
       },
     ),
     );

@@ -183,7 +183,7 @@ class CartScreen extends StatelessWidget {
               print(size.width );
             },text: 'Check out >',width: size.width*.8,textStyle:const TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 22,
               fontFamily: 'General Sans',
               fontWeight: FontWeight.w500,
               height: 0,
@@ -196,9 +196,10 @@ class CartScreen extends StatelessWidget {
         toolbarHeight: 30,
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leading: SizedBox(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           children: [
             Row(
@@ -242,7 +243,7 @@ class CartScreen extends StatelessWidget {
                         separatorBuilder: (context, index) => Divider(),
                         itemCount: products.length
                     ),
-                  ):Center(child: Text('No items yet')),
+                  ):Center(child: Text('No items yet',style: customTextStyle(color: kPrimaryColor,fontSize: 20,),)),
 
                 ],
               ),

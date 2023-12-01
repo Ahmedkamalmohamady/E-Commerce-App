@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/bloc_observer/Bloc_observer.dart';
@@ -33,6 +34,10 @@ void main() async {
     widget = const OnBoardingScreen();
   }
   print(token);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  statusBarColor: Colors.transparent,
+    systemNavigationBarContrastEnforced: false
+  ));
   runApp(ShopApp(home: widget));
 }
 
@@ -54,7 +59,9 @@ class ShopApp extends StatelessWidget {
 
       ],
       child: MaterialApp(
+
         theme: ThemeData(
+
             brightness: Brightness.light,
             primarySwatch: Colors.indigo,
             fontFamily: GoogleFonts
