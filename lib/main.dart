@@ -50,7 +50,7 @@ class ShopApp extends StatelessWidget {
         BlocProvider(create: (context) => NavBarCubit(),),
         BlocProvider(create: (context) => HomeCubit()..getData()..getFavouritesProducts(),),
         BlocProvider(create: (context) => UserCubit()..getUserProfile(),),
-        BlocProvider(create: (context) => CartCubit(),),
+        BlocProvider(create: (context) => CartCubit()..getMyCart()),
 
       ],
       child: MaterialApp(

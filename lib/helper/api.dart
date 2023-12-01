@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+
 
 class Api {
  static String baseUrl = 'https://student.valuxapps.com/api/';
@@ -43,7 +43,7 @@ class Api {
       }) async {
 
     if (token != null) {
-      headers!.addAll({'Authorization': token,});
+      headers?.addAll({'Authorization': token,});
     }
     var dio = Dio();
     Response response = await dio.post(baseUrl+endpoint,
@@ -100,10 +100,10 @@ class Api {
         Map<String,String>?body
      }) async {
    if (token != null) {
-     headers?.addAll({'Authorization': 'Bearer $token',});
+     headers?.addAll({'Authorization': '$token',});
    }
    var dio = Dio();
-   Response response = await dio.post(baseUrl+endpoint,
+   Response response = await dio.delete(baseUrl+endpoint,
      options: Options(
        headers: headers,
      ),

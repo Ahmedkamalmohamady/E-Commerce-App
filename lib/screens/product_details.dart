@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/widgets/custom_widgets.dart';
 import 'package:shop_app/widgets/description_text_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../cubits/cart_cubit/cart_cubit.dart';
 import '../cubits/home_cubit/home_cubit.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -18,6 +19,10 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
   PageController controller =PageController();
   var size=MediaQuery.of(context).size;
+
+    return BlocBuilder<CartCubit,CartState>(
+  builder: (context, state) {
+    var isLoading=CartCubit.get(context).isLoading;
     return Scaffold(
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -75,8 +80,10 @@ class ProductDetails extends StatelessWidget {
               width: 40,
             ),
             CustomButton(onPressed: (){
-              print(size.width );
-            },text: 'Add to Cart',width: 200,textStyle:const TextStyle(
+              CartCubit.get(context).AddOrRemoveProductToCart(product.id);
+            },
+              text: isLoading? null:'Add to Cart',
+              width: 200,textStyle:const TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontFamily: 'General Sans',
@@ -209,5 +216,7 @@ class ProductDetails extends StatelessWidget {
         )
       ),
     );
+  },
+);
   }
 }

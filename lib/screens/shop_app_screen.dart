@@ -8,12 +8,14 @@ import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/cubits/nav_bar-cubit/nav_bar_cubit.dart';
 import 'package:shop_app/screens/login_screen.dart';
 import '../widgets/custom_widgets.dart';
+import 'cart_screen.dart';
 
 class ShopAppScreen extends StatelessWidget {
   const ShopAppScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int itemsNumber=0;
     var navBarCubit = NavBarCubit.get(context);
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
@@ -28,18 +30,36 @@ class ShopAppScreen extends StatelessWidget {
 
       },
       builder: (context, state) {
+
         return BlocBuilder<NavBarCubit, NavBarState>(
 
           builder: (context, state) {
             return Scaffold(
-              floatingActionButton: Stack(
-                alignment: Alignment.center,
-                children: [
-                  CircleAvatar(radius: 35,backgroundColor: Colors.transparent),
-                  CircleAvatar(radius: 30,child: Icon(LineAwesomeIcons.shopping_cart)),
-                  Positioned(top: 0,right: 8,child: CircleAvatar(backgroundColor: Colors.white,radius: 12,child: Text('13',style: TextStyle(color: kPrimaryColor,fontSize: 12,fontWeight: FontWeight.bold)),))
+              floatingActionButton: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                },
+                child: BlocConsumer<CartCubit,CartState>(
+                  listener: (context, state) {
+                    if(state is AddingToCartSuccess)
+                    {
+                    itemsNumber=CartCubit.get(context).myCart!.data.cartItems.length;
+                    print( itemsNumber);
 
-                ],
+                    }
+                  },
+                builder: (context, state) {
+                  return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    const CircleAvatar(radius: 35,backgroundColor: Colors.transparent),
+                     CircleAvatar(radius: 30,child:(state is GetCartLoading ||state is AddingToCartLoading)?CircularProgressIndicator(): Icon(LineAwesomeIcons.shopping_cart)),
+                    if(CartCubit.get(context).cartItems!=null&&CartCubit.get(context).myCart!.data.cartItems.length!=0)Positioned(top: 0,right: 8,child: CircleAvatar(backgroundColor: Colors.white,radius: 12,child: Text(CartCubit.get(context).myCart!.data.cartItems.length.toString(),style: TextStyle(color: kPrimaryColor,fontSize: 14,fontWeight: FontWeight.bold)),))
+
+                  ],
+                );
+  },
+),
               ),
               bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,

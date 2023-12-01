@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/widgets/custom_grid_view.dart';
 
 import '../widgets/custom_category_item.dart';
-import '../widgets/custom_item_card.dart';
+
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key, this.id, this.title}) : super(key: key);
@@ -20,7 +20,9 @@ final title;
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
-              title: Text(title,style: customTextStyle(fontWeight: FontWeight.w600)),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              title: Text(title.toString().toUpperCase(),style: customTextStyle(fontWeight: FontWeight.w600,color: kPrimaryColor)),
             ),
             body:state is GetProductsForCategoryLoading ?const CustomShimmerCategoryProduct():HomeCubit.get(context).products!=null
                 ?SingleChildScrollView(

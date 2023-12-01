@@ -1,3 +1,5 @@
+
+
 import 'package:shop_app/models/home_model.dart';
 
 class CartModel
@@ -38,5 +40,49 @@ factory CartModelData.fromJson(json)
       product: Product.fromJson(json['product'])
   );
 }
+
+}
+class MyCartModel
+{
+  final dynamic message;
+  final bool status;
+  final MyCartDataModel data;
+
+  MyCartModel({required this.message, required this.status, required this.data});
+
+  factory MyCartModel.fromJson(json)
+  {
+    return MyCartModel(
+        message: json['message'],
+        status: json['status'],
+        data: MyCartDataModel.fromJson(json['data'])
+    );
+  }
+
+}
+class MyCartDataModel
+{
+  final List<CartModelData> cartItems;
+  final dynamic subTotal;
+  final dynamic total;
+
+  MyCartDataModel({required this.cartItems, required this.subTotal, required this.total});
+  factory MyCartDataModel.fromJson(json)
+  {
+    List<CartModelData>items=[];
+    if(json['cart_items']!=[])
+    {
+      json['cart_items'].forEach((e)
+      {
+        items.add(CartModelData.fromJson(e));
+      });
+    }
+    return MyCartDataModel(
+
+        cartItems:items,
+        subTotal: json['sub_total'],
+        total: json['total']
+    );
+  }
 
 }

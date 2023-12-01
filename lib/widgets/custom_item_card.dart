@@ -5,11 +5,8 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
-import 'package:shop_app/models/favourites_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/screens/product_details.dart';
-import 'package:shop_app/services/favourites_services.dart';
-import 'package:shop_app/widgets/custom_widgets.dart';
 
 Widget customItemCard(Product product,context) => SizedBox(
   child:   InkWell(
@@ -133,13 +130,17 @@ Widget customItemCard(Product product,context) => SizedBox(
             ],
           ),
         ),
-        InkWell(
-            onTap: () async{
-              CartCubit.get(context).AddOrRemoveProductToCart(product.id);
-            },
+        Positioned(
+          bottom: 15,
+          right: 20,
+          child: InkWell(
+              onTap: () async{
+                CartCubit.get(context).AddOrRemoveProductToCart(product.id);
+              },
 
-            splashFactory: InkSparkle.splashFactory,
-            child: CircleAvatar(backgroundColor: Colors.black12,child: Icon(LineAwesomeIcons.add_to_shopping_cart,size: 30,color: kPrimaryColor,))),
+              splashFactory: InkSparkle.splashFactory,
+              child: CircleAvatar(backgroundColor: Colors.black12,child: Icon(LineAwesomeIcons.add_to_shopping_cart,size: 30,color: kPrimaryColor,))),
+        ),
       ],
     ),
   ),

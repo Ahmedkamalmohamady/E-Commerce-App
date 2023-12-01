@@ -18,3 +18,8 @@ class AddingToCartFailed extends CartState {
 
 }
 
+class GetCartLoading extends CartState {}
+class GetCartSuccess extends CartState {}
+class GetCartFailed extends CartState {}
+class UpdatedSuccessfully extends CartState {}
+
