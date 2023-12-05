@@ -1,7 +1,7 @@
-Flutter E-Commerce App
+## Flutter E-Commerce App
 This is a Flutter-based e-commerce application that allows users to create an account, browse and purchase items, create a favorites section, explore categories, and edit their profiles. The app interacts with a custom API for authentication and other backend operations.
 
-Features
+## Features
 User Registration: Users can create an account by providing their email address and password. Upon successful registration, users will receive a confirmation email.
 
 Authentication: Users can securely log in to their accounts using their registered email and password. Authentication is handled through the custom API.
