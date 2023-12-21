@@ -1,11 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/screens/login_screen.dart';
-import 'package:shop_app/widgets/custom_text_form_field.dart';
 
 import '../constants.dart';
 
@@ -20,8 +19,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> formKey =GlobalKey();
-    double height =const MediaQueryData().size.height;
-    double width =const MediaQueryData().size.width;
+
     final TextEditingController nameController=TextEditingController();
     final TextEditingController emailController=TextEditingController();
     final TextEditingController phoneController=TextEditingController();
@@ -48,27 +46,28 @@ class RegisterScreen extends StatelessWidget {
         child: Form(
           key: formKey,
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding:  EdgeInsets.all(12.0.w),
             child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: width+180,
+                  height: 150.h,
                 ),
                 //Center(child: Lottie.asset('assets/images/login_purple.json',height:200 ,width: 200,frameRate: FrameRate(60),fit: BoxFit.fill,)),
 
-                Text('Create an account',style: customTextStyle(fontSize: 32,color: kPrimaryColor,fontWeight: FontWeight.w600,height: 0.05,
+                Text('Create an account',style: customTextStyle(fontSize: 32.sp,color: kPrimaryColor,fontWeight: FontWeight.w600,height: 0.05,
                   letterSpacing: -1.60,)),
                 const SizedBox(
                   height: 10,
                 ),
-                Text("Let’s create your account",style: customTextStyle(fontSize: 16,color: Colors.grey,height: 0,
+                Text("Let’s create your account",style: customTextStyle(fontSize: 16.sp,color: Colors.grey,height: 0,
                   letterSpacing: -0.32,)),
 
                 const SizedBox(
                   height: 10,
                 ),
                 CustomTextForm(
+
                     onChanged: (value) {
                       nameController.text =value;
                     }
@@ -120,13 +119,14 @@ class RegisterScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text("Already have an account ? ",style: customTextStyle(fontSize: 16,color: Colors.grey,fontWeight: FontWeight.w400,
+                     Text("Already have an account ? ",style: customTextStyle(fontSize: 16.sp,color: Colors.grey,fontWeight: FontWeight.w400,
                        height: 0,
                        letterSpacing: -0.32,)),
-                    TextButton(onPressed: ()
+                    TextButton(
+                        onPressed: ()
                     {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
-                    }, child:  Text('login',style: customTextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.w400,
+                    }, child:  Text('login',style: customTextStyle(fontSize: 18.sp,color: kPrimaryColor,fontWeight: FontWeight.w400,
                     height: 0,
                         letterSpacing: -0.32,decoration: TextDecoration.underline),))
                   ],

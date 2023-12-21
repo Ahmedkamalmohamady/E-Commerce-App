@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/bloc_observer/Bloc_observer.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
@@ -17,7 +18,7 @@ import 'package:shop_app/screens/onboarding_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-
+  await ScreenUtil.ensureScreenSize();
   Bloc.observer = MyBlocObserver();
   dynamic onBoarding = await CacheHelper.getData(key: kOnBoarding);
   token =await CacheHelper.getData(key: kToken);
@@ -58,26 +59,33 @@ class ShopApp extends StatelessWidget {
         BlocProvider(create: (context) => CartCubit()..getMyCart()),
 
       ],
-      child: MaterialApp(
+      child: ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          splitScreenMode: true,
+        builder: (context,_) {
+          return MaterialApp(
 
-        theme: ThemeData(
+            theme: ThemeData(
 
-            brightness: Brightness.light,
-            primarySwatch: Colors.indigo,
-            fontFamily: GoogleFonts
-                .openSans()
-                .fontFamily,
-            navigationBarTheme: const NavigationBarThemeData(
-              labelTextStyle: MaterialStatePropertyAll(
-                TextStyle(color: kPrimaryColor),),
-              indicatorColor: kPrimaryColor,
+                brightness: Brightness.light,
+                primarySwatch: Colors.indigo,
+                fontFamily: GoogleFonts
+                    .openSans()
+                    .fontFamily,
+                navigationBarTheme: const NavigationBarThemeData(
+                  labelTextStyle: MaterialStatePropertyAll(
+                    TextStyle(color: kPrimaryColor),),
+                  indicatorColor: kPrimaryColor,
 
-            )
-        ),
+                )
+            ),
 
-        darkTheme: ThemeData.dark(),
-        debugShowCheckedModeBanner: false,
-        home: home,
+            darkTheme: ThemeData.dark(),
+            debugShowCheckedModeBanner: false,
+            home: home,
+          );
+        }
       ),
     );
   }

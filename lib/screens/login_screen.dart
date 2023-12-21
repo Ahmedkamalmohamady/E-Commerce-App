@@ -1,13 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
 import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
-import 'package:shop_app/screens/onboarding_screen.dart';
 import 'package:shop_app/screens/register_screen.dart';
 
 import '../constants.dart';
@@ -19,11 +18,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height =const MediaQueryData().size.height;
-
-    double width =const MediaQueryData().size.width;
-
-    GlobalKey<FormState> formKey=GlobalKey();
+   final GlobalKey<FormState> formKey=GlobalKey();
 
     String? email;
 
@@ -41,20 +36,20 @@ class LoginScreen extends StatelessWidget {
             child: Form(
               key: formKey,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding:  EdgeInsets.all(12.0.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: width+230,
+                      height: 150.h,
                     ),
                     //Center(child: Lottie.asset('assets/images/login_purple.json',height:200 ,width: 200,frameRate: FrameRate(60),fit: BoxFit.fill,)),
 
-                    Text('LOGIN',style: customTextStyle(fontSize: 36,color: kPrimaryColor,fontWeight: FontWeight.bold)),
+                    Text('LOGIN',style: customTextStyle(fontSize: 36.sp,color: kPrimaryColor,fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 10,
                     ),
-                    Text('Login now to explore our products',style: customTextStyle(fontSize: 18,color: Colors.grey,height: 0,letterSpacing: -0.32)),
+                    Text('Login now to explore our products',style: customTextStyle(fontSize: 18.sp,color: Colors.grey,height: 0,letterSpacing: -0.32)),
 
                     const SizedBox(
                       height: 10,
@@ -100,13 +95,13 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("don't have an account ? ",style: customTextStyle(fontSize: 16,color: Colors.grey ,fontWeight: FontWeight.w400,
+                        Text("don't have an account ? ",style: customTextStyle(fontSize: 16.sp,color: Colors.grey ,fontWeight: FontWeight.w400,
                           height: 0,
                           letterSpacing: -0.32, )),
                         TextButton(onPressed: ()
                         {
                           Navigator.push(context,MaterialPageRoute(builder: (context) => const RegisterScreen(),));
-                        }, child: Text('Register',style: customTextStyle(fontSize: 18,color: kPrimaryColor,fontWeight: FontWeight.w400,
+                        }, child: Text('Register',style: customTextStyle(fontSize: 18.sp,color: kPrimaryColor,fontWeight: FontWeight.w400,
                             height: 0,
                             letterSpacing: -0.32,decoration: TextDecoration.underline),))
                       ],

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
@@ -27,16 +28,16 @@ Widget customItemCard(Product product,context) => SizedBox(
                 alignment: Alignment.bottomLeft,
                 children: [
                   CachedNetworkImage(
-                    width: 210,
-                    height: 180,
+                    width: 180.w,
+                    height: 105.h,
                     fit: BoxFit.contain,
                     imageUrl: product.image!,
                     errorWidget: (context, url, error) {
                       return Column(
                         children: [
                           const Icon(Icons.error_outline),
-                          const SizedBox(
-                            height: 10,
+                           SizedBox(
+                            height: 8.h,
                           ),
                           Text(error.toString())
                         ],
@@ -47,99 +48,100 @@ Widget customItemCard(Product product,context) => SizedBox(
                   ),
                   if (product.discount != 0)
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      padding:  EdgeInsets.symmetric(horizontal: 5.0.w),
                       child: Container(
-                        height: 25,
-                        width: 90,
+                        height: 22.w,
+                        width: 80.w,
                         color: Colors.redAccent,
-                        child: const Center(
+                        child:  Center(
                             child: Text(
                               'DISCOUNT',
                               style: TextStyle(
+                                fontSize: 14.sp,
                                   color: Colors.white, fontWeight: FontWeight.bold),
                             )),
                       ),
                     ),
                   Positioned(
                     top: 0,
-                    right: 2,
+                    right: 2.w,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.all(8.0.w),
                       child: InkWell(
                           onTap: () async{
                             HomeCubit.get(context).changeFavourite(product.id);
                           },
 
                           splashFactory: InkSparkle.splashFactory,
-                          child: HomeCubit.get(context).favourites[product.id]!?CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
-                            backgroundColor: Colors.black12,child: const Icon(Icons.favorite_border,
-                              color: Colors.black45, size: 30),
+                          child: HomeCubit.get(context).favourites[product.id]!?const CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
+                            backgroundColor: Colors.black12,child:  Icon(Icons.favorite_border,
+                              color: Colors.black45, size: 30.sp),
                           )),
                     ),
                   )
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
+                     SizedBox(
+                      height: 10.h,
                     ),
                     SizedBox(
-                        width: 190,
+                        width: 180.w,
                         child: Text(
                           product.name!,
                           style: customTextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                              fontSize: 16.sp, fontWeight: FontWeight.w600),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         )),
-                    const SizedBox(height: 10),
+                     SizedBox(height: 10.h),
 
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text('${product.price.round().toString()} L.E',
+              Expanded(
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('${product.price.round().toString()} L.E',
                           style: customTextStyle(
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w600,
                               color: kPrimaryColor)),
-                    ),
 
-                    if (product.discount != 0)
-                      Text('${product.oldPrice.round().toString()} L.E',
+                      if (product.discount != 0)
+                        Text('${product.oldPrice.round().toString()} L.E',
 
-                          style: customTextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough,
-                              decorationThickness: 3,
-                              decorationColor: Colors.red)),
-                  ],
+                            style: customTextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey,
+                                decoration: TextDecoration.lineThrough,
+                                decorationThickness: 3,
+                                decorationColor: Colors.red)),
+                    ],
+                  ),
                 ),
               )
             ],
           ),
         ),
         Positioned(
-          bottom: 15,
-          right: 20,
+          bottom: 22.h,
+          right: 10.w,
           child: InkWell(
               onTap: () async{
                 CartCubit.get(context).AddOrRemoveProductToCart(product.id);
               },
 
               splashFactory: InkSparkle.splashFactory,
-              child: CircleAvatar(backgroundColor: Colors.black12,child: Icon(LineAwesomeIcons.add_to_shopping_cart,size: 30,color: kPrimaryColor,))),
+              child:  CircleAvatar(backgroundColor: Colors.black12,child: Icon(LineAwesomeIcons.add_to_shopping_cart,size: 30.spMax,color: kPrimaryColor,))),
         ),
       ],
     ),
@@ -148,8 +150,8 @@ Widget customItemCard(Product product,context) => SizedBox(
 
 Widget customShimmerCard() => SizedBox(
   child:Container(
-    width: 180,
-    height: 220,
+    width: 180.w,
+    height: 220.h,
     decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20)

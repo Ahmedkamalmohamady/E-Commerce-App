@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -39,25 +40,25 @@ class CustomOnboardingScreen extends StatelessWidget {
               )),
           Text(pageModel.title,
               style:
-              const TextStyle(fontSize: 26,color: kPrimaryColor)),
+               TextStyle(fontSize: 26.sp,color: kPrimaryColor)),
           Text(
               pageModel.subTitle,
-              style: const TextStyle(
+              style:  TextStyle(
                   color: Colors.grey,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w500)),
-          const SizedBox(
-            height: 100,
+           SizedBox(
+            height: 80.h,
           ),
           Row(
             children: [
               SmoothPageIndicator(
                 count: onBoardingPages.length,
                 controller: pageController,
-                effect: const SlideEffect(
-                  radius: 25,
-                  dotHeight: 12,
-                  dotWidth: 12,
+                effect:  SlideEffect(
+                  radius: 20.r,
+                  dotHeight: 10.w,
+                  dotWidth: 10.w,
                 ),
               ),
               const Spacer(),
@@ -79,7 +80,7 @@ class CustomOnboardingScreen extends StatelessWidget {
                   child: Text(
                     isLast ? 'Login' : 'Next',
                     style: GoogleFonts.nunito(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor),
                   )),

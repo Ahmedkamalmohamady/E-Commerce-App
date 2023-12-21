@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
@@ -20,15 +21,17 @@ final title;
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
               elevation: 0,
               backgroundColor: Colors.transparent,
-              title: Text(title.toString().toUpperCase(),style: customTextStyle(fontWeight: FontWeight.w600,color: kPrimaryColor)),
+              title: Text(
+                  textAlign: TextAlign.center,title.toString().toUpperCase(),style: customTextStyle(fontWeight: FontWeight.w600,color: kPrimaryColor,fontSize: 22.sp)),
             ),
             body:state is GetProductsForCategoryLoading ?const CustomShimmerCategoryProduct():HomeCubit.get(context).products!=null
                 ?SingleChildScrollView(
               child:Column(
                 children: [
-                  const SizedBox(height: 30,),
+                   SizedBox(height: 28.h,),
                   CustomGridView( products:HomeCubit.get(context).products),
                 ],
               )

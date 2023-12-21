@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/models/login_model.dart';
@@ -8,22 +8,27 @@ import 'package:shop_app/widgets/custom_widgets.dart';
 
 import '../constants.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
-  const UpdateProfileScreen({Key? key, required this.user}) : super(key: key);
+class UpdateProfileScreen extends StatefulWidget {
+   const UpdateProfileScreen({Key? key, required this.user}) : super(key: key);
   final LoginModel user;
 
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
 
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var formKey=GlobalKey<FormState>();
-    final TextEditingController nameController=TextEditingController(text:user.data!.name );
-    final TextEditingController emailController=TextEditingController(text:user.data!.email );
-    final TextEditingController phoneController=TextEditingController(text:user.data!.phone );
-    final TextEditingController passwordController=TextEditingController();
+    final GlobalKey<FormState> formKey=GlobalKey();
+    final  nameController=TextEditingController(text:widget.user.data!.name );
+    final  emailController=TextEditingController(text:widget.user.data!.email );
+    final phoneController=TextEditingController(text:widget.user.data!.phone );
+    final  passwordController=TextEditingController();
     return BlocProvider(
   create: (context) => UserCubit(),
   child: BlocBuilder<UserCubit, UserState>(
   builder: (context, state) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -39,23 +44,23 @@ class UpdateProfileScreen extends StatelessWidget {
               Stack(
                 children: [
                   SizedBox(
-                    width: 120,
-                    height: 120,
+                    width: 120.w,
+                    height: 120.w,
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(100.r),
                         child: const CircleAvatar()),
                   ),
                   Positioned(
                     bottom: 0,
                     right: 0,
                     child: Container(
-                      width: 35,
-                      height: 35,
+                      width: 35.w,
+                      height: 35.w,
                       decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(100), color: kPrimaryColor),
+                      BoxDecoration(borderRadius: BorderRadius.circular(100.r), color: kPrimaryColor),
                       child: InkWell(
                         onTap: () async {
-                          XFile? image= await ImagePicker().pickImage(source: ImageSource.gallery,);
+                         // XFile? image= await ImagePicker().pickImage(source: ImageSource.gallery,);
                         },
                           child: const Icon(LineAwesomeIcons.camera, color: Colors.black, size: 20)),
                     ),
@@ -86,9 +91,9 @@ class UpdateProfileScreen extends StatelessWidget {
                     CustomButton(text: UserCubit.get(context).isLoading?null:'Update'.toUpperCase(),
                       onPressed: () {
                       if(
-                      nameController.text==user.data!.name&&
-                      emailController.text==user.data!.email&&
-                      phoneController.text==user.data!.phone&&
+                      nameController.text==widget.user.data!.name&&
+                      emailController.text==widget.user.data!.email&&
+                      phoneController.text==widget.user.data!.phone&&
                       passwordController.text.isEmpty
                       )
                       {
@@ -100,7 +105,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               email:emailController.text,
                               phone:phoneController.text,
                               password:passwordController.text,
-                              image:user.data!.image,
+                              image:widget.user.data!.image,
                             context: context
                           );
                           print('updated successflly ');

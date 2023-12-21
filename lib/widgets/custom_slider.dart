@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/models/home_model.dart';
 
 import 'custom_banner.dart';
@@ -23,7 +24,7 @@ class CustomSlider extends StatelessWidget {
       options: CarouselOptions(
         clipBehavior: Clip.none,
         scrollDirection: Axis.horizontal,
-        height: 160,
+        height: 140.h,
         animateToClosest: true,
         autoPlayAnimationDuration: Duration(seconds: 3),
         autoPlay: true,

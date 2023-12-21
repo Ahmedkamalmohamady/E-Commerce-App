@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/widgets/custom_item_card.dart';
 
 import '../models/home_model.dart';
@@ -18,11 +19,11 @@ class CustomGridView extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: .65,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 10,
+          childAspectRatio: .7,
+          mainAxisSpacing: 5.h,
+          crossAxisSpacing: 2.w,
         ),
         itemBuilder: (context, index) => customItemCard(products![index],context),
         itemCount: products!.length,

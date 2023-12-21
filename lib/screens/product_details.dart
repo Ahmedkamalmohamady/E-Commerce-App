@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/widgets/custom_widgets.dart';
@@ -31,20 +32,19 @@ class ProductDetails extends StatelessWidget {
             color: Colors.black.withOpacity(0.03)
           )
         ),
-          width: 390,
-          height: 101,
+          height: 80.h,
           // color: Colors.grey,
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 15.0,left: 20),
+              padding:  EdgeInsets.only(top: 15.0.h,left: 20.w),
               child: Column(
                 children: [
-                  const Text(
+                   Text(
                     'Price',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w400,
                       height: 0,
@@ -52,10 +52,10 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product.price.toString()+'  L.E' ,
-                    style: const TextStyle(
+                    '${product.price}  L.E' ,
+                    style:  TextStyle(
                       color: kPrimaryColor,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w600,
                       height: 0,
@@ -63,11 +63,11 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ),
                   product.discount != 0?Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding:  EdgeInsets.only(left: 50.0.w),
                     child: Text('${product.oldPrice.round().toString()} L.E',
 
                         style: customTextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
@@ -77,17 +77,16 @@ class ProductDetails extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              width: 40,
+             SizedBox(
+              width: 40.w,
             ),
             CustomButton(onPressed: (){
               CartCubit.get(context).AddOrRemoveProductToCart(product.id);
-              print(inCart[product.id]);
             },
               text: isLoading? null:inCart[product.id]!=null&&inCart[product.id]==false?'Remove from Cart':'Add to Cart',
-              width: 200,textStyle:const TextStyle(
+              width: 180.w,textStyle: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 16.sp,
               fontFamily: 'General Sans',
               fontWeight: FontWeight.w500,
               height: 0,
@@ -97,25 +96,26 @@ class ProductDetails extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 80,),
+               SizedBox(height: 60.w,),
               Row(
                 children: [
                   InkWell(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                      child: const Icon(CupertinoIcons.back,color: Colors.grey,size: 30,)),
-                  const SizedBox(width: 30,),
-                  const Text(
+                      child:  Icon(CupertinoIcons.back,color: Colors.grey,size: 30.spMax,)),
+                   SizedBox(width: 30.w,),
+                   Text(
                     'Details',
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.center
+                    ,
                     style: TextStyle(
                       color: kPrimaryColor,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w600,
                       height: 0.09,
@@ -124,11 +124,11 @@ class ProductDetails extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 20,),
+               SizedBox(height: 20.h,),
               Center(
                 child: Container(
                   width: double.infinity,
-                  height: 300,
+                  height: 240.h,
                   clipBehavior: Clip.antiAlias,
                   decoration: ShapeDecoration(
                     shape: RoundedRectangleBorder(
@@ -156,8 +156,8 @@ class ProductDetails extends StatelessWidget {
                        })
                      ,),
                       Positioned(
-                        right: 10,
-                        top: 10,
+                        right: 10.w,
+                        top: 10.h,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
@@ -166,9 +166,9 @@ class ProductDetails extends StatelessWidget {
                               },
 
                               splashFactory: InkSparkle.splashFactory,
-                              child: HomeCubit.get(context).favourites[product.id]!?const CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):const CircleAvatar(
+                              child: HomeCubit.get(context).favourites[product.id]!? const CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)): CircleAvatar(
                                 backgroundColor: Colors.black12,child: Icon(Icons.favorite_border,
-                                  color: Colors.black45, size: 30),
+                                  color: Colors.black45, size: 30.spMax),
                               )),
                         )
 
@@ -183,10 +183,10 @@ class ProductDetails extends StatelessWidget {
                             child: SmoothPageIndicator(
                               controller: controller,
                               count: product.images!.length,
-                              effect: const SlideEffect(
-                                radius: 30,
-                                dotHeight: 5,
-                                dotWidth: 15,
+                              effect:  SlideEffect(
+                                radius: 30.r,
+                                dotHeight: 5.h,
+                                dotWidth: 15.w,
                               ),
                             ),
                           ),
@@ -199,19 +199,19 @@ class ProductDetails extends StatelessWidget {
               ),
               Text(
                  product.name!,
-                style: const TextStyle(
-                  fontSize: 24,
+                style:  TextStyle(
+                  fontSize: 24.sp,
                   fontFamily: 'General Sans',
                   fontWeight: FontWeight.w600,
                   height: 0,
                   // letterSpacing: -0.48,
                 ),
               ),
-              const SizedBox(
-                height: 20,
+               SizedBox(
+                height: 15.h,
               ),
               DescriptionTextWidget(text: product.description!),
-              const SizedBox( height: 20,),
+               SizedBox( height: 10.h,),
 
             ],
           ),

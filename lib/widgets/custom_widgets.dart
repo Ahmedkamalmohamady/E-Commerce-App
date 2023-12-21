@@ -1,30 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
 import '../constants.dart';
 
 class CustomTextForm extends StatefulWidget {
-  CustomTextForm({super.key,required this.isPassword ,this.controller,this.onChanged, this.hintText,this.labelText,this.prefixIcon,this.radius=3,this.type=TextInputType.text});
-  String? hintText;
-  String? labelText;
-  IconData? prefixIcon;
-  bool isPassword;
-  double radius;
-  TextInputType type=TextInputType.none;
-  TextEditingController? controller;
-  Function (String)? onChanged;
+  const CustomTextForm({super.key,required this.isPassword ,this.controller,this.onChanged, this.hintText,this.labelText,this.prefixIcon,this.radius=3,this.type});
+  final String? hintText;
+ final  String? labelText;
+ final  IconData? prefixIcon;
+ final  bool isPassword;
+ final  double? radius;
+ final  TextInputType? type;
+ final TextEditingController? controller;
+ final  Function (String)? onChanged;
 
   @override
   State<CustomTextForm> createState() => _CustomTextFormState();
 }
 
 class _CustomTextFormState extends State<CustomTextForm> {
-  bool showPassword=false;
+  bool showPassword=true;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       controller: widget.controller,
       keyboardType: widget.type,
       validator: (value) {
@@ -32,19 +34,21 @@ class _CustomTextFormState extends State<CustomTextForm> {
         {
           return 'this filed musn\'t be empty';
         }
+        return null;
       },
       onChanged: widget.onChanged,
-      obscureText: showPassword,
+      obscureText: widget.isPassword ?showPassword:false,
 
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 15.h),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.radius),
+          borderRadius: BorderRadius.circular(widget.radius??10.0.r),
 
         ),
         hintText: widget.hintText,
         label: Text(widget.labelText!),
-        labelStyle: const TextStyle(color: Colors.grey,
-            fontSize: 18
+        labelStyle:  TextStyle(color: Colors.grey,
+            fontSize: 18.sp
 
         ),
 
@@ -58,13 +62,13 @@ class _CustomTextFormState extends State<CustomTextForm> {
         const Icon(CupertinoIcons.eye_slash,color:Colors.grey,):const Icon(CupertinoIcons.eye,color:Colors.grey,)):
         const SizedBox(),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.radius),
+          borderRadius: BorderRadius.circular(widget.radius??10.r),
           borderSide: const BorderSide(
             color: kPrimaryColor,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.radius),
+          borderRadius: BorderRadius.circular(widget.radius??10.r),
           borderSide: const BorderSide(
             color: Colors.grey,
           ),
@@ -78,17 +82,17 @@ class CustomButton extends StatefulWidget {
   const CustomButton({
     this.text,
     this.onPressed,
-    this.radius=10.0,
+    this.radius,
     this.width=double.maxFinite,
-    this.height=50,
+    this.height,
     Key? key, this.textStyle,
   }) : super(key: key);
 
   final String? text;
   final VoidCallback? onPressed;
-  final  double radius;
+  final  double? radius;
   final double width;
-  final double height;
+  final double? height;
   final TextStyle? textStyle;
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -100,9 +104,9 @@ class _CustomButtonState extends State<CustomButton> {
     return ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(kPrimaryColor),
-        fixedSize: MaterialStateProperty.all(Size(widget.width,widget.height)),
+        fixedSize: MaterialStateProperty.all(Size(widget.width,widget.height??45.h)),
         shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius??10.r)),
         ),
       ),
       onPressed: widget.onPressed,
@@ -116,7 +120,7 @@ class _CustomButtonState extends State<CustomButton> {
           fontWeight: FontWeight.w600,
           height: 0,
           letterSpacing: -0.32,
-          fontSize: 16,
+          fontSize: 16.sp,
         ),
       )
           : const CircularProgressIndicator(
@@ -129,7 +133,7 @@ class _CustomButtonState extends State<CustomButton> {
 void ShowToastMessage({required String msg, Color? color}) {
   Fluttertoast.showToast(
 
-    fontSize: 18,
+    fontSize: 18.sp,
     msg: msg,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,

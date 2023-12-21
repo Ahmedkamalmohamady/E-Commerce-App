@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
@@ -37,7 +38,7 @@ class ShopAppScreen extends StatelessWidget {
             return Scaffold(
               floatingActionButton: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen(),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen(),));
                 },
                 child: BlocConsumer<CartCubit,CartState>(
                   listener: (context, state) {
@@ -52,9 +53,9 @@ class ShopAppScreen extends StatelessWidget {
                   return Stack(
                   alignment: Alignment.center,
                   children: [
-                    const CircleAvatar(radius: 35,backgroundColor: kPrimaryColor),
-                     CircleAvatar(backgroundColor: kPrimaryColor,radius: 30,child:(state is GetCartLoading ||state is AddingToCartLoading)?CircularProgressIndicator(color: Colors.white,): Icon(LineAwesomeIcons.shopping_cart,size: 30,)),
-                    if(CartCubit.get(context).cartItems!=null&&CartCubit.get(context).myCart!.data.cartItems.length!=0)Positioned(top: 0,right: 8,child: CircleAvatar(backgroundColor: Colors.white,radius: 12,child: Text(CartCubit.get(context).myCart!.data.cartItems.length.toString(),style: TextStyle(color: kPrimaryColor,fontSize: 14,fontWeight: FontWeight.bold)),))
+                     CircleAvatar(radius: 32.r,backgroundColor: kPrimaryColor),
+                     CircleAvatar(backgroundColor: kPrimaryColor,radius: 32.r,child:(state is GetCartLoading ||state is AddingToCartLoading)?const CircularProgressIndicator(color: Colors.white,): Icon(LineAwesomeIcons.shopping_cart,size: 30.spMax,)),
+                    if(CartCubit.get(context).cartItems!=null&&CartCubit.get(context).myCart!.data.cartItems.isNotEmpty)Positioned(top: -1.h,right: 6.w,child: CircleAvatar(backgroundColor: Colors.white,radius: 12.r,child: Text(CartCubit.get(context).myCart!.data.cartItems.length.toString(),style: TextStyle(color: Colors.red,fontSize: 16.sp,fontWeight: FontWeight.bold)),))
 
                   ],
                 );

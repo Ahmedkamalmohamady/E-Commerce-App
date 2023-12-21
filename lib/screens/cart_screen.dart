@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 
@@ -24,7 +25,7 @@ class CartScreen extends StatelessWidget {
     var  total=CartCubit.get(context).myCart!.data.total;
     var  subtotal=CartCubit.get(context).myCart!.data.subTotal;
     return Scaffold(
-      bottomNavigationBar: products.length!=0?Container(
+      bottomNavigationBar: products.isNotEmpty?Container(
         decoration: BoxDecoration(
           color: Colors.transparent,
             border: Border.all(
@@ -34,13 +35,14 @@ class CartScreen extends StatelessWidget {
             )
         ),
 
-        height: 260,
+        // height: 230.h,
         // color: Colors.grey,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+              padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 10.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -48,7 +50,7 @@ class CartScreen extends StatelessWidget {
                     'Sub-total',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w400,
                       height: 0.09,
@@ -59,9 +61,9 @@ class CartScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(right: .0),
                     child: Text(
                       '${(subtotal).round()}  L.E' ,
-                      style: const TextStyle(
+                      style:  TextStyle(
                         color: kPrimaryColor,
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontFamily: 'General Sans',
                         fontWeight: FontWeight.w600,
                         height: 0,
@@ -74,7 +76,7 @@ class CartScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
+              padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 5.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -82,25 +84,22 @@ class CartScreen extends StatelessWidget {
                     'VAT (%)',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w400,
                       height: 0.09,
                       letterSpacing: -0.32,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: .0),
-                    child: Text(
-                      '0.0  L.E' ,
-                      style: const TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 18,
-                        fontFamily: 'General Sans',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        letterSpacing: -0.48,
-                      ),
+                  Text(
+                    '0.0  L.E' ,
+                    style:  TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 18.sp,
+                      fontFamily: 'General Sans',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                      letterSpacing: -0.48,
                     ),
                   ),
 
@@ -108,7 +107,7 @@ class CartScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 5),
+              padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -116,34 +115,31 @@ class CartScreen extends StatelessWidget {
                     'Shipping fee',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.w400,
                       height: 0.09,
                       letterSpacing: -0.32,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: .0),
-                    child: Text(
-                      '0.0  L.E' ,
-                      style: const TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 18,
-                        fontFamily: 'General Sans',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        letterSpacing: -0.48,
-                      ),
+                  Text(
+                    '0.0  L.E' ,
+                    style:  TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 18.sp,
+                      fontFamily: 'General Sans',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                      letterSpacing: -0.48,
                     ),
                   ),
 
                 ],
               ),
             ),
-            Divider(thickness: 2,indent: 20,endIndent: 20),
+            Divider(thickness: 2,indent: 20.w,endIndent: 20.w),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+              padding:  EdgeInsets.symmetric(horizontal: 20.0.w,vertical: 10.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -151,55 +147,52 @@ class CartScreen extends StatelessWidget {
                     'Total',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontFamily: 'General Sans',
                       fontWeight: FontWeight.bold,
                       height: 0.09,
                       letterSpacing: -0.32,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: .0),
-                    child: Text(
-                      '${total.round()}  L.E' ,
-                      style: const TextStyle(
-                        color: kPrimaryColor,
-                        fontSize: 18,
-                        fontFamily: 'General Sans',
-                        fontWeight: FontWeight.w600,
-                        height: 0,
-                        letterSpacing: -0.48,
-                      ),
+                  Text(
+                    '${total.round()}  L.E' ,
+                    style:  TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 18.sp,
+                      fontFamily: 'General Sans',
+                      fontWeight: FontWeight.w600,
+                      height: 0,
+                      letterSpacing: -0.48,
                     ),
                   ),
 
                 ],
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 8.h,
             ),
             CustomButton(onPressed: (){
               print(size.width );
-            },text: 'Check out >',width: size.width*.8,textStyle:const TextStyle(
+            },text: 'Check out >',width: size.width*.8,textStyle: TextStyle(
               color: Colors.white,
-              fontSize: 22,
+              fontSize: 22.sp,
               fontFamily: 'General Sans',
               fontWeight: FontWeight.w500,
               height: 0,
             ),),
-            SizedBox(height: 20)
+            SizedBox(height: 20.h)
           ],
         ),
       ):null,
       appBar: AppBar(
-        toolbarHeight: 30,
+        toolbarHeight: 25.h,
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: SizedBox(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
         child: Column(
           children: [
             Row(
@@ -209,7 +202,7 @@ class CartScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: const Icon(CupertinoIcons.back,color: Colors.grey,size: 30,)),
+                    child:  Icon(CupertinoIcons.back,color: Colors.grey,size: 30.spMin,)),
                 Spacer(
                   flex: 8,
                 ),
@@ -218,7 +211,7 @@ class CartScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: kPrimaryColor,
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontFamily: 'General Sans',
                     fontWeight: FontWeight.w600,
                     height: 0.09,
@@ -230,12 +223,12 @@ class CartScreen extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  products.length!=0?Expanded(
+                  products.isNotEmpty?Expanded(
                     child: ListView.separated(
                         itemBuilder: (context, index) {
                           return CustomProductInCart(size: size,product: products[index],);

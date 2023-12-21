@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/category_model.dart';
 import 'package:shop_app/screens/categories_screen.dart';
 
-import '../cubits/home_cubit/home_cubit.dart';
 import 'custom_item_card.dart';
 
 Widget customCategoryItem(CategoryData category,context) => SizedBox(
@@ -20,25 +20,25 @@ Widget customCategoryItem(CategoryData category,context) => SizedBox(
       // color: Colors.transparent,
       elevation: 5,
       shadowColor: Colors.black26,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
       child: Row(
         children: [
 
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SizedBox(width: 150,child: Text(category.name!.toUpperCase(),overflow: TextOverflow.ellipsis,maxLines: 2,style: customTextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: kPrimaryColor))),
+            child: SizedBox(width: 150.w,child: Text(category.name!.toUpperCase(),overflow: TextOverflow.ellipsis,maxLines: 2,style: customTextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold,color: kPrimaryColor))),
           ),
 
 
           ClipRRect(
 
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20.r),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: CachedNetworkImage(
-                width: 90,
-                height: 90,
+                width: 90.w,
+                height: 90.w,
                 fit: BoxFit.fill,
                 imageUrl: category.image!,
                 errorWidget: (context, url, error) {
@@ -78,18 +78,18 @@ Widget customShimmerCategoryItem() => SizedBox(
 
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SizedBox(width: 150),
+          child: SizedBox(width: 150.w),
         ),
 
 
         ClipRRect(
 
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Container(
-              width: 90,
-              height: 90,
+              width: 90.w,
+              height: 90.w,
               color: Colors.white,
             ),
           ),
@@ -118,8 +118,8 @@ class CustomShimmerCategoryProduct extends StatelessWidget {
               crossAxisCount: 2,
               shrinkWrap: true,
               childAspectRatio: .8,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
+              crossAxisSpacing: 20.w,
+              mainAxisSpacing: 20.w,
               children: [
                 customShimmerCard(),
                 customShimmerCard(),

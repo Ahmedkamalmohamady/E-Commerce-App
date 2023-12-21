@@ -1,12 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_app/cache_helper/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/onboarding_model.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../widgets/custom_onboarding_screen.dart';
 import 'login_screen.dart';
@@ -44,13 +41,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                          builder: (context) => const LoginScreen(),
                         ));
                   },
                   child: Text(
                     'Skip',
                     style: GoogleFonts.nunito(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                         color: kPrimaryColor),
                   ))
@@ -68,7 +65,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               });
             }
           },
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           itemCount: onBoardingPages.length,
           controller: pageController,
           itemBuilder: (context, index) => CustomOnboardingScreen(pageController: pageController, isLast: isLast,pageModel: onBoardingPages[index]),

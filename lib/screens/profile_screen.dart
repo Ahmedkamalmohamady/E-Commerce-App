@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:shop_app/cubits/login_cubit/login_cubit.dart';
 import 'package:shop_app/cubits/user_cubit/user_cubit.dart';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/screens/shop_app_screen.dart';
@@ -26,15 +25,33 @@ class ProfileScreen extends StatelessWidget {
       return Scaffold(
 
           appBar: AppBar(
+            actions: [
+              TextButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateProfileScreen(user: user!),));
+
+
+              }, child:  Row(
+                children: [
+                  Text('Edit',style: customTextStyle(
+                    fontSize: 16.sp,fontWeight: FontWeight.w600
+                  ),),
+                  Icon(
+                    LineAwesomeIcons.alternate_pencil,
+                    color: kPrimaryColor,
+                    size: 20.sp,
+                  ),
+                ],
+              ))
+            ],
             backgroundColor: Colors.transparent,
             elevation: 0,
             // leading: IconButton(onPressed: () {}, icon: const Icon(LineAwesomeIcons.angle_left)),
-            title: Text("Profile",style: customTextStyle(fontWeight: FontWeight.w600,fontSize: 22,color: kPrimaryColor),),
+            title: Text("Profile",style: customTextStyle(fontWeight: FontWeight.w600,fontSize: 22.sp,color: kPrimaryColor),),
             // actions: [IconButton(onPressed: () {}, icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon,color: isDark ?Colors.white:Colors.black,))],
           ),
           body: user!=null? SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0.w),
               child: Column(
                 children: [
 
@@ -44,8 +61,8 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       ClipRRect(
 
-                          borderRadius: BorderRadius.circular(200), child: CachedNetworkImage(imageUrl: user!.data!.image!,width: 140,height: 140,fit: BoxFit.cover,errorWidget: (context, url, error) {
-                        return Column(
+                          borderRadius: BorderRadius.circular(200.r), child: CachedNetworkImage(imageUrl: user.data!.image!,width: 140.w,height: 140.w,fit: BoxFit.cover,errorWidget: (context, url, error) {
+                        return const Column(
                           children: [
                             Icon(Icons.error_outline,size: 50),
                             Text('Invalid image',)
@@ -56,86 +73,81 @@ class ProfileScreen extends StatelessWidget {
                         bottom: 0,
                         right: 0,
                         child: Container(
-                          width: 45,
-                          height: 45,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: kPrimaryColor),
-                          child: const Icon(
+                          width: 40.w,
+                          height: 40.w,
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(100.r), color: kPrimaryColor),
+                          child:  Icon(
                             LineAwesomeIcons.alternate_pencil,
                             color: Colors.black,
-                            size: 20,
+                            size: 20.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Text(user!.data!.name!, style: Theme.of(context).textTheme.headline4),
+                  Text(user.data!.name!,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                    fontSize: 24.sp
+                  )),
                   //Text(user.data!.email!, style: Theme.of(context).textTheme.bodyText2),
                   const SizedBox(height: 20),
 
                   /// -- BUTTON
-                  SizedBox(
-                    width: 200,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateProfileScreen(user: user!),));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kPrimaryColor, side: BorderSide.none, shape: const StadiumBorder()),
-                      child: const Text("edit profile",),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   width: 200.w,
+                  //   child: ElevatedButton(
+                  //     onPressed: () {
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //         backgroundColor: kPrimaryColor, side: BorderSide.none, shape: const StadiumBorder()),
+                  //     child: const Text("edit profile",),
+                  //   ),
+                  // ),
 
 
                   /// -- MENU///
                   Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
+                    padding:  EdgeInsets.only(right: 10.0.w),
                     child: ExpansionTile(
                       trailing: Container(
-                          width: 30,
-                          height: 30,
+                          width: 30.w,
+                          height: 30.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(100.r),
                             color: Colors.grey.withOpacity(0.1),
                           ),
-                          child: const Icon(LineAwesomeIcons.angle_down, size: 18.0, color: Colors.grey)),
-                      tilePadding: EdgeInsets.all(0),
-                      title: ProfileMenuWidget(title: "Information", icon: LineAwesomeIcons.info,endIcon: false,),
+                          child:  Icon(LineAwesomeIcons.angle_down, size: 18.0.sp, color: Colors.grey)),
+                      tilePadding: const EdgeInsets.all(0),
+                      title: const ProfileMenuWidget(title: "Information", icon: LineAwesomeIcons.info,endIcon: false,),
                       children: [
-                        ProfileMenuWidget(title: user!.data!.email!, icon: Icons.email,endIcon: false,textColor: Colors.grey,
-                          //     onPress: () {
-                          //
-                          // }
+                        ProfileMenuWidget(title: user.data!.email!, icon: Icons.email,endIcon: false,textColor: Colors.grey,
+
                         ),
-                        ProfileMenuWidget(title: user!.data!.phone!, icon: Icons.phone,endIcon: false,textColor: Colors.grey,
-                          //     onPress: () {
-                          //
-                          // }
+                        ProfileMenuWidget(title: user.data!.phone!, icon: Icons.phone,endIcon: false,textColor: Colors.grey,
+
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
+                          padding:  EdgeInsets.only(right: 10.0.w),
                           child: ExpansionTile(
                             trailing: Container(
-                                width: 30,
-                                height: 30,
+                                width: 30.w,
+                                height: 30.w,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
+                                  borderRadius: BorderRadius.circular(100.r),
                                   color: Colors.grey.withOpacity(0.1),
                                 ),
-                                child: const Icon(LineAwesomeIcons.angle_down, size: 18.0, color: Colors.grey)),
-                            tilePadding: EdgeInsets.all(0),
-                            title: ProfileMenuWidget(title: "Addresses", icon: Icons.location_on_outlined,endIcon: false,
-                              //     onPress: () {
-                              //
-                              // }
+                                child:  Icon(LineAwesomeIcons.angle_down, size: 18.0.sp, color: Colors.grey)),
+                            tilePadding: const EdgeInsets.all(0),
+                            title: const ProfileMenuWidget(title: "Addresses", icon: Icons.location_on_outlined,endIcon: false,
+
                             ),
                             children: [
-                              ProfileMenuWidget(title: user!.data!.email!, icon: Icons.email,endIcon: false,textColor: Colors.grey,
-                                //     onPress: () {
-                                //
-                                // }
+                              ProfileMenuWidget(title: user.data!.email!, icon: Icons.email,endIcon: false,textColor: Colors.grey,
+
                               ),
-                              ProfileMenuWidget(title: user!.data!.phone!, icon: Icons.phone,endIcon: false,textColor: Colors.grey,
+                              ProfileMenuWidget(title: user.data!.phone!, icon: Icons.phone,endIcon: false,textColor: Colors.grey,
                                 //     onPress: () {
                                 //
                                 // }
@@ -149,21 +161,19 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
+                    padding:  EdgeInsets.only(right: 10.0.h),
                     child: ExpansionTile(
                       trailing: Container(
-                          width: 30,
-                          height: 30,
+                          width: 30.w,
+                          height: 30.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(100.r),
                             color: Colors.grey.withOpacity(0.1),
                           ),
-                          child: const Icon(LineAwesomeIcons.angle_down, size: 18.0, color: Colors.grey)),
-                      tilePadding: EdgeInsets.all(0),
-                      title: ProfileMenuWidget(title: "Settings", icon: LineAwesomeIcons.info,endIcon: false,
-                        //     onPress: () {
-                        //
-                        // }
+                          child:  Icon(LineAwesomeIcons.angle_down, size: 18.0.sp, color: Colors.grey)),
+                      tilePadding: const EdgeInsets.all(0),
+                      title: const ProfileMenuWidget(title: "Settings", icon: LineAwesomeIcons.cog,endIcon: false,
+
                       ),
                       children: [
                         ProfileMenuWidget(title: 'Mode', icon:LineAwesomeIcons.sun  ,endIcon: true,textColor: Colors.grey,
@@ -199,7 +209,7 @@ class ProfileScreen extends StatelessWidget {
                       UserCubit.get(context).userInfo=null;
                       signOut(context);
                     },
-                    child: ProfileMenuWidget(
+                    child: const ProfileMenuWidget(
                       title: "Logout",
                       icon: LineAwesomeIcons.alternate_sign_out,
                       textColor: Colors.red,
@@ -210,7 +220,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           )
-              :LinearProgressIndicator(color: kPrimaryColor,));
+              :const LinearProgressIndicator(color: kPrimaryColor,));
     },
 );
 }

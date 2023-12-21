@@ -2,11 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
 import 'package:shop_app/screens/shimmer/home_shimmer.dart';
-import 'package:shop_app/widgets/custom_widgets.dart';
 
 import '../widgets/categories_list.dart';
 import '../widgets/custom_grid_view.dart';
@@ -23,10 +23,10 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {},
-              icon: const Icon(
+              icon:  Icon(
                 Icons.search_rounded,
                 color: kPrimaryColor,
-                size: 30,
+                size: 30.spMax,
               )),
         ],
         elevation: 0,
@@ -39,12 +39,12 @@ class HomeScreen extends StatelessWidget {
               style: customTextStyle(
                   color: kPrimaryColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 22.sp,
                 letterSpacing: -1.20
               ),
             ),
-            const Icon(
-              size: 30,
+             Icon(
+              size: 30.spMax,
               LineAwesomeIcons.shopping_cart,
               color: kPrimaryColor,
             )
@@ -71,15 +71,15 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Text('Categories',
                         style: customTextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold, fontSize: 22.sp)),
                   ),
                   const CategoriesListView(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0, vertical: 20),
+                    padding:  EdgeInsets.symmetric(
+                        horizontal: 10.0.w, vertical: 20.h),
                     child: Text('All Products',
                         style: customTextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22)),
+                            fontWeight: FontWeight.bold, fontSize: 22.sp)),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

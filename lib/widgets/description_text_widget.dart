@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/constants.dart';
 
 class DescriptionTextWidget extends StatefulWidget {
@@ -32,13 +33,13 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 10.0.h),
       child: secondHalf!.isEmpty
           ? Text(firstHalf!)
           : Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(flag ? ("${firstHalf!}...") : (firstHalf! + secondHalf!),style: TextStyle(color: Colors.grey)),
+          Text(flag ? ("${firstHalf!}...") : (firstHalf! + secondHalf!),style: TextStyle(color: Colors.grey,fontSize: 16.sp)),
           InkWell(
             child: Text(
               flag ? "show more" : "show less",

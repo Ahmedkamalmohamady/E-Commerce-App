@@ -26,6 +26,7 @@ void Function()? suffixPressed,
         {
           return 'this filed musn\'t be empty';
         }
+        return null;
       },
       decoration: InputDecoration(
         labelText: label,
@@ -40,6 +41,6 @@ void Function()? suffixPressed,
           ),
         )
             : null,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
     );

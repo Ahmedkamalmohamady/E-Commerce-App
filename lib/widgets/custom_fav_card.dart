@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/models/home_model.dart';
 
 import '../constants.dart';
 import '../cubits/home_cubit/home_cubit.dart';
-import '../screens/product_details.dart';
 
 Widget customFavCard(Product product,context) => Row(
   crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,10 +19,10 @@ Widget customFavCard(Product product,context) => Row(
         alignment: Alignment.bottomLeft,
         children: [
           CachedNetworkImage(
-            width: 120,
-            height: 120,
+            width: 110.w,
+            height: 110.w,
             fit: BoxFit.contain,
-            imageUrl: product!.image!,
+            imageUrl: product.image!,
             errorWidget: (context, url, error) {
               return Column(
                 children: [
@@ -41,8 +41,8 @@ Widget customFavCard(Product product,context) => Row(
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Container(
-                height: 25,
-                width: 90,
+                height: 25.h,
+                width: 90.w,
                 color: Colors.redAccent,
                 child: const Center(
                     child: Text(
@@ -56,39 +56,44 @@ Widget customFavCard(Product product,context) => Row(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding:  EdgeInsets.symmetric(horizontal: 20.0.w
+      ),
       child: Column(
         children: [
-          const SizedBox(
-            height: 10,
+           SizedBox(
+            height: 8.h,
           ),
           SizedBox(
-              width: 190,
+              width: 150.w,
               child: Text(
                 product.name!,
                 style: customTextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w600),
+                    fontSize: 16.sp, fontWeight: FontWeight.w600),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               )),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text('${product.price.round().toString()} L.E',
-                style: customTextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: kPrimaryColor)),
-          ),
-          if (product.discount != 0)
-            Text('${product.oldPrice.round().toString()} L.E',
-                style: customTextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey,
-                    decoration: TextDecoration.lineThrough,
-                    decorationThickness: 3,
-                    decorationColor: Colors.red)),
+           SizedBox(height: 8.h),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text('${product.price.round().toString()} L.E',
+                    style: customTextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: kPrimaryColor)),
+              ),
+              if (product.discount != 0)
+                Text('${product.oldPrice.round().toString()} L.E',
+                    style: customTextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                        decorationThickness: 3,
+                        decorationColor: Colors.red)),
+            ],
+          )
         ],
       ),
     ),
@@ -98,9 +103,9 @@ Widget customFavCard(Product product,context) => Row(
         },
 
         splashFactory: InkSparkle.splashFactory,
-        child: HomeCubit.get(context).favourites[product.id]!?CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
-          backgroundColor: Colors.black12,child: const Icon(Icons.favorite_border,
-            color: Colors.black45, size: 30),
+        child: HomeCubit.get(context).favourites[product.id]!?const CircleAvatar(backgroundColor: Colors.black12,child: Icon(CupertinoIcons.heart_solid,color: kPrimaryColor,)):CircleAvatar(
+          backgroundColor: Colors.black12,child:  Icon(Icons.favorite_border,
+            color: Colors.black45, size: 30.sp),
         )),
   ],
 );

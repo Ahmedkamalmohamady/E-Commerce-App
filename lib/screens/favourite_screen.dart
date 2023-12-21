@@ -1,17 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_app/cubits/home_cubit/home_cubit.dart';
-import 'package:shop_app/models/home_model.dart';
-import 'package:shop_app/screens/product_details.dart';
 
 import '../constants.dart';
-import '../models/favourites_model.dart';
-import '../services/favourites_services.dart';
 import '../widgets/custom_fav_card.dart';
-import '../widgets/custom_grid_view.dart';
-import '../widgets/custom_widgets.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -24,7 +18,7 @@ class FavouriteScreen extends StatelessWidget {
 
         title: Text('Favourite Products',
             style: customTextStyle(
-                fontWeight: FontWeight.bold, fontSize: 22,color: kPrimaryColor)),
+                fontWeight: FontWeight.bold, fontSize: 22.sp,color: kPrimaryColor)),
         backgroundColor: Colors.transparent,
 
       ),
@@ -32,13 +26,13 @@ class FavouriteScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
 
-        return HomeCubit.get(context).favouritesIsReady==null?LinearProgressIndicator(color: kPrimaryColor,):HomeCubit.get(context).favProducts!.data!.FavProducts!.isNotEmpty?
+        return HomeCubit.get(context).favouritesIsReady==null?const LinearProgressIndicator(color: kPrimaryColor,):HomeCubit.get(context).favProducts!.data!.FavProducts!.isNotEmpty?
           Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            SizedBox(
-              height: 30,
+             SizedBox(
+              height: 20.h,
             ),
             Expanded(
               child: ListView.separated(
@@ -49,13 +43,13 @@ class FavouriteScreen extends StatelessWidget {
                     return customFavCard(product!,context);
                   },
                   separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: 20,
+                    return  SizedBox(
+                      height: 20.h,
                       child: Divider(
                         color: Colors.black12,
                         thickness: 2,
-                        endIndent: 30,
-                        indent: 30,
+                        endIndent: 30.w,
+                        indent: 30.w,
                       ),
                     );
                   },
@@ -64,7 +58,7 @@ class FavouriteScreen extends StatelessWidget {
             ),
           ],
         )
-        :Center(child: Text('No favourites yet ',style: TextStyle(color: kPrimaryColor,fontSize: 20),));
+        :const Center(child: Text('No favourites yet ',style: TextStyle(color: kPrimaryColor,fontSize: 20),));
       },
     ),
     );
